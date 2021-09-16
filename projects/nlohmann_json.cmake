@@ -48,6 +48,7 @@ ExternalProject_Add(${extProjectName}
     -DCMAKE_CXX_STANDARD_REQUIRED=ON
     -Wno-dev
     -DJSON_BuildTests=OFF
+    -DJSON_MultipleHeaders=ON
 
   LOG_DOWNLOAD 1
   LOG_UPDATE 1
