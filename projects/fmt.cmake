@@ -64,6 +64,6 @@ ExternalProject_Add(${extProjectName}
 file(APPEND ${DREAM3D_SDK_FILE} "\n")
 file(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 file(APPEND ${DREAM3D_SDK_FILE} "# fmt\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(fmt_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${fmt_VERSION}-\${BUILD_TYPE}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${DREAM3D_SDK_FILE} "set(fmt_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${fmt_VERSION}-\${BUILD_TYPE}/share/${extProjectName}\" CACHE PATH \"\")\n")
 file(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${fmt_DIR})\n")
 file(APPEND ${DREAM3D_SDK_FILE} "set(fmt_VERSION \"${fmt_VERSION}\" CACHE STRING \"\")\n")
