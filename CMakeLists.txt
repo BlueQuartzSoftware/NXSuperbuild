@@ -141,28 +141,18 @@ include(Eigen)
 include(catch2)
 include(fmt)
 include(expected-lite)
-
-
-
+include(VTK)
+include(ITK5)
 # include(Python)
 # include(Discount)
 # include(TBB)
 # include(Haru)
 # include(Boost)
 
-
 #--------------------------------------------------------------------------------------------------
 # If we are on Apple we need a FileSystem compatible with macOS < 10.15 or GCC < version 9
 #--------------------------------------------------------------------------------------------------
 include(ghcFileSystem)
-
-#--------------------------------------------------------------------------------------------------
-# By Default use ITK 5.1
-#--------------------------------------------------------------------------------------------------
-if("${ITKVersion}" STREQUAL "")
-  set(ITKVersion "5")
-endif()
-include(ITK${ITKVersion})
 
 #--------------------------------------------------------------------------------------------------
 # Install or figure out where Qt5 is installed, then build Qwt based on that information

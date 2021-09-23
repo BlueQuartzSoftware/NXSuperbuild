@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------------------------------------
 # Are we building ITK (ON by default)
 #--------------------------------------------------------------------------------------------------
-OPTION(BUILD_ITK "Build ITK" ON)
+OPTION(BUILD_ITK "Build ITK" OFF)
 if("${BUILD_ITK}" STREQUAL "OFF")
   return()
 endif()
