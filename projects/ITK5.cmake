@@ -14,18 +14,18 @@ message(STATUS "ITK Version ${ITK_VERSION} is being used. If you want ITK Versio
 message(STATUS "Building: ${extProjectName} ${ITK_VERSION}: -DBUILD_ITK=${BUILD_ITK}" )
 
 option(ITK_SCIFIO_SUPPORT "Add support for SCIFIO to the ITK build" OFF)
-set(SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${ITK_VERSION}/Source/${extProjectName}")
-set(ITK_INSTALL_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
-set(BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}/Build-${CMAKE_BUILD_TYPE}")
+set(SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${ITK_VERSION}/Source/${extProjectName}")
+set(ITK_INSTALL_DIR "${NX_SDK}/superbuild/${extProjectName}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
+set(BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}/Build-${CMAKE_BUILD_TYPE}")
 
 #!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#!#
 # The next section about setting the HDF5_CMAKE_MODULE_DIR directory is VERY 
 # dependent on the version of HDF5 that is being used.
 
 if(WIN32)
-  set(SOURCE_DIR "${DREAM3D_SDK}/${extProjectName}-src")
-  set(BINARY_DIR "${DREAM3D_SDK}/${extProjectName}-${ITK_VERSION}")
-  set(ITK_INSTALL_DIR "${DREAM3D_SDK}/${extProjectName}-${ITK_VERSION}")
+  set(SOURCE_DIR "${NX_SDK}/${extProjectName}-src")
+  set(BINARY_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}")
+  set(ITK_INSTALL_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}")
   set(CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MP")
   set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/cmake/hdf5")
 elseif(APPLE)
@@ -33,13 +33,13 @@ elseif(APPLE)
   set(CMAKE_OSX_SYSROOT "${OSX_SDK}")
   set(CMAKE_SKIP_INSTALL_RPATH "OFF")
   set(CMAKE_SKIP_RPATH "OFF")
-  set(BINARY_DIR "${DREAM3D_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
-  set(ITK_INSTALL_DIR "${DREAM3D_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
+  set(BINARY_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
+  set(ITK_INSTALL_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
   set(CXX_FLAGS "-stdlib=libc++ -std=c++14")
   set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/share/cmake/hdf5")
 elseif("${BUILD_ITK}" STREQUAL "ON")
-  set(BINARY_DIR "${DREAM3D_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
-  set(ITK_INSTALL_DIR "${DREAM3D_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
+  set(BINARY_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
+  set(ITK_INSTALL_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
   set(CXX_FLAGS "-std=c++14")
   set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/share/cmake/hdf5")
 else()
@@ -58,8 +58,8 @@ else()
   set(upper "RELEASE")
 endif( CMAKE_BUILD_TYPE MATCHES Debug )
 
-set_property(DIRECTORY PROPERTY EP_BASE ${DREAM3D_SDK}/superbuild)
-set(D3DSP_BASE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${ITK_VERSION}")
+set_property(DIRECTORY PROPERTY EP_BASE ${NX_SDK}/superbuild)
+set(D3DSP_BASE_DIR "${NX_SDK}/superbuild/${extProjectName}-${ITK_VERSION}")
 
 
 if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
@@ -156,17 +156,17 @@ ExternalProject_Add(${extProjectName}
 )
 
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-FILE(APPEND ${DREAM3D_SDK_FILE} "\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "# ITK Library Location\n")
+FILE(APPEND ${NX_SDK_FILE} "\n")
+FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+FILE(APPEND ${NX_SDK_FILE} "# ITK Library Location\n")
 if(WIN32)
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-${ITK_VERSION}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-${ITK_VERSION}\" CACHE PATH \"\")\n")
 else()
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-${ITK_VERSION}-\${BUILD_TYPE}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-${ITK_VERSION}-\${BUILD_TYPE}\" CACHE PATH \"\")\n")
 endif()
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(DREAM3D_USE_ITK \"ON\")\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${ITK_DIR})\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(ITK_VERSION \"${ITK_VERSION}\" CACHE STRING \"\")\n")
+FILE(APPEND ${NX_SDK_FILE} "set(DREAM3D_USE_ITK \"ON\")\n")
+FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${ITK_DIR})\n")
+FILE(APPEND ${NX_SDK_FILE} "set(ITK_VERSION \"${ITK_VERSION}\" CACHE STRING \"\")\n")
 

@@ -41,8 +41,8 @@ You should be able to use "apt-get" or "yum" or your preferred package manager t
 **Decide NOW** where you want the DREAM3D SDK to be built/installed. We sandbox the entire SDK so that we do not interfere with your system or in case you can not install to typical locations:
 
 + /usr/local/DREAM3_SDK
-+ /opt/DREAM3D_SDK
-+ /home/$USER/DREAM3D_SDK
++ /opt/NX_SDK
++ /home/$USER/NX_SDK
 
 are 3 possible locations to use. Make sure those directories are created and you have write access to them.
 
@@ -52,9 +52,9 @@ Clone this repository:
     git clone https://github.com/bluequartzsoftware/DREAM3DSuperbuild
     cd DREAM3Superbuild
     mkdir Debug && cd Debug
-    cmake -DDREAM3D_SDK=/opt/DREAM3D_SDK -DCMAKE_BUILD_TYPE=Debug ../
+    cmake -DNX_SDK=/opt/NX_SDK -DCMAKE_BUILD_TYPE=Debug ../
 
-... Wait for Qt to download and install... **PLEASE DO NOT ADJUST THE INSTALLATION LOCATION OF Qt5**. We depend on it being placed in the DREAM3D_SDK
+... Wait for Qt to download and install... **PLEASE DO NOT ADJUST THE INSTALLATION LOCATION OF Qt5**. We depend on it being placed in the NX_SDK
 
     make -j or ninja 
 
@@ -64,7 +64,7 @@ Clone this repository:
 
     cd $HOME/DREAM3DSuperbuild/
     mkdir Release && cd Release
-    cmake -DDREAM3D_SDK=/opt/DREAM3D_SDK -DCMAKE_BUILD_TYPE=Release ../
+    cmake -DNX_SDK=/opt/NX_SDK -DCMAKE_BUILD_TYPE=Release ../
 
 ... There is **NO** Qt5 download this time so it will go quickly.
 

@@ -9,9 +9,9 @@ endif()
 set(extProjectName "nlohmann_json")
 set(nlohmann_json_GIT_TAG "v3.9.1")
 set(nlohmann_json_VERSION "3.9.1")
-message(STATUS "Building: ${extProjectName} ${nlohmann_json_VERSION}:  nlohmann_json required")
+message(STATUS "Building: ${extProjectName} ${nlohmann_json_VERSION}: -DBUILD_NLOHMANN_JSON=${BUILD_NLOHMANN_JSON}")
 
-set(nlohmann_json_INSTALL "${DREAM3D_SDK}/${extProjectName}-${nlohmann_json_VERSION}")
+set(nlohmann_json_INSTALL "${NX_SDK}/${extProjectName}-${nlohmann_json_VERSION}")
 
 if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
@@ -30,11 +30,11 @@ endif()
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
 
-  TMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
-  STAMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/Stamp"
-  DOWNLOAD_DIR ${DREAM3D_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/Download
-  SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/Source"
-  BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/Build/${CMAKE_BUILD_TYPE}"
+  TMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
+  STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/Stamp"
+  DOWNLOAD_DIR ${NX_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/Download
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/Source"
+  BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}-${nlohmann_json_VERSION}/Build/${CMAKE_BUILD_TYPE}"
   INSTALL_DIR "${nlohmann_json_INSTALL}"
 
   CMAKE_ARGS
@@ -58,11 +58,11 @@ ExternalProject_Add(${extProjectName}
   LOG_INSTALL 1
 )
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-file(APPEND ${DREAM3D_SDK_FILE} "\n")
-file(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-file(APPEND ${DREAM3D_SDK_FILE} "# nlohmann_json\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(nlohmann_json_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${nlohmann_json_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${nlohmann_json_DIR})\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(nlohmann_json_VERSION \"${nlohmann_json_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "\n")
+file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+file(APPEND ${NX_SDK_FILE} "# nlohmann_json\n")
+file(APPEND ${NX_SDK_FILE} "set(nlohmann_json_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${nlohmann_json_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${nlohmann_json_DIR})\n")
+file(APPEND ${NX_SDK_FILE} "set(nlohmann_json_VERSION \"${nlohmann_json_VERSION}\" CACHE STRING \"\")\n")

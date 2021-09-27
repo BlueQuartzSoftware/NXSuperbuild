@@ -50,7 +50,7 @@ To install Git, please visit the [Git website](https://git-scm.com/downloads).
 
 ### Basic Setup ###
 
-**1: Create a folder called DREAM3D_SDK on your C:\ drive**
+**1: Create a folder called NX_SDK on your C:\ drive**
 ![](Images/Windows/create_sdk_folder.png)
 
 **2: Download and install CMake from https://cmake.org/download:**
@@ -63,7 +63,7 @@ Press the download link to download the zip file of the latest release of CMake.
 
 Click on the zip file that you just downloaded to extract it into a folder.
 
-Move the newly extracted folder into the **DREAM3D_SDK** folder that we created earlier.
+Move the newly extracted folder into the **NX_SDK** folder that we created earlier.
 ![](Images/Windows/cmake_in_sdk_folder.png)
 
 ### Clone Repository ###
@@ -90,11 +90,11 @@ Create a folder called **workspace** in your home directory (C:\Users\\[username
 
     ![Create a CMake variable](Images/Windows/add_entry.png)
 
-4. Set the **Name** to *DREAM3D_SDK*.  Set the **Type** to *PATH* and set the **Value** to the location of the DREAM3D_SDK folder that we created earlier (*C:\DREAM3D_SDK*).
+4. Set the **Name** to *NX_SDK*.  Set the **Type** to *PATH* and set the **Value** to the location of the NX_SDK folder that we created earlier (*C:\NX_SDK*).
 
   ![Set Name of CMake variable](Images/Windows/create_cmake_variable.png)
 
-5. You should now have a few variables, DREAM3D_SDK.
+5. You should now have a few variables, NX_SDK.
 
   ![CMake before configure](Images/Windows/cmake_before_configuration.png)
 
@@ -135,7 +135,7 @@ Due to an incompatibility between VS2019 and ITK 4.13.x when configuring DREAM3D
 
   ![Visual Studio](Images/Windows/visual_studio_project.png)
 
-12. Click Build -> Build Solution to begin building the SDK.  This will take some time.  Please be patient as your SDK builds. Once the build starts all of the dependent libaries are either built or downloaded. All libraries are installed into the DREAM3D_SDK folder that you specified earlier. Nothing that DREAM.3D depends on is installed into any system directories.
+12. Click Build -> Build Solution to begin building the SDK.  This will take some time.  Please be patient as your SDK builds. Once the build starts all of the dependent libaries are either built or downloaded. All libraries are installed into the NX_SDK folder that you specified earlier. Nothing that DREAM.3D depends on is installed into any system directories.
 In addition all of the needed source codes for DREAM.3D itself will be cloned from GitHub and stored in directories rooted at the same level as the DREAM3DSuperbuild directory. You can override this behavior by specifying the **DREAM3D_WORKSPACE** CMake variable.
 
 13. Change Debug selection to Release and repeat Step 12.
@@ -144,7 +144,7 @@ In addition all of the needed source codes for DREAM.3D itself will be cloned fr
 
 Now that you have all of the dependent libraries built you are now ready to compile DREAM.3D. For the examples below we are going to assume the following folder structure:
 
-* DREAM3D_SDK is located at C:/DREAM3D_SDK
+* NX_SDK is located at C:/NX_SDK
 * DREAM3D_WORKSPACE is located at C:/Users/\[USERNAME\]/Workspace
 
 There are 6 basic git repositories that need to be cloned:

@@ -15,16 +15,16 @@ set(HDF5_GIT_TAG "hdf5-1_12_1")
 #set(HDF5_URL "https://github.com/BlueQuartzSoftware/DREAM3DSuperbuild/releases/download/v6.6/hdf5-${HDF5_VERSION}.tar.gz")
 
 if(WIN32)
-  set(HDF5_INSTALL "${DREAM3D_SDK}/${extProjectName}-${HDF5_VERSION}")
+  set(HDF5_INSTALL "${NX_SDK}/${extProjectName}-${HDF5_VERSION}")
 else()
-  set(HDF5_INSTALL "${DREAM3D_SDK}/${extProjectName}-${HDF5_VERSION}-${CMAKE_BUILD_TYPE}")
+  set(HDF5_INSTALL "${NX_SDK}/${extProjectName}-${HDF5_VERSION}-${CMAKE_BUILD_TYPE}")
 endif()
 
 if( CMAKE_BUILD_TYPE MATCHES Debug )
   set(HDF5_SUFFIX "_debug")
 ENDif( CMAKE_BUILD_TYPE MATCHES Debug )
 
-set_property(DIRECTORY PROPERTY EP_BASE ${DREAM3D_SDK}/superbuild)
+set_property(DIRECTORY PROPERTY EP_BASE ${NX_SDK}/superbuild)
 
 
 if(WIN32)
@@ -50,11 +50,11 @@ endif()
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
 
-  TMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
-  STAMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}/Stamp/${CMAKE_BUILD_TYPE}"
-  DOWNLOAD_DIR ${DREAM3D_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}
-  SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}/Source/${extProjectName}"
-  BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}/Build/${CMAKE_BUILD_TYPE}"
+  TMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
+  STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}/Stamp/${CMAKE_BUILD_TYPE}"
+  DOWNLOAD_DIR ${NX_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}/Source/${extProjectName}"
+  BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}-${HDF5_VERSION}/Build/${CMAKE_BUILD_TYPE}"
   INSTALL_DIR "${HDF5_INSTALL}"
 
   CMAKE_ARGS
@@ -86,20 +86,20 @@ ExternalProject_Add(${extProjectName}
 )
 
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-FILE(APPEND ${DREAM3D_SDK_FILE} "\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "# HDF5 Library Location\n")
+FILE(APPEND ${NX_SDK_FILE} "\n")
+FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+FILE(APPEND ${NX_SDK_FILE} "# HDF5 Library Location\n")
 if(APPLE)
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(HDF5_INSTALL \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}-\${BUILD_TYPE}\" CACHE PATH \"\")\n")
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(HDF5_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}-\${BUILD_TYPE}/share/hdf5\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(HDF5_INSTALL \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}-\${BUILD_TYPE}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(HDF5_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}-\${BUILD_TYPE}/share/hdf5\" CACHE PATH \"\")\n")
 elseif(WIN32)
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(HDF5_INSTALL \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}\" CACHE PATH \"\")\n")
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(HDF5_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}/share/hdf5\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(HDF5_INSTALL \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(HDF5_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}/share/hdf5\" CACHE PATH \"\")\n")
 else()
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(HDF5_INSTALL \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}-\${BUILD_TYPE}\" CACHE PATH \"\")\n")
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(HDF5_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}-\${BUILD_TYPE}/share/hdf5\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(HDF5_INSTALL \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}-\${BUILD_TYPE}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(HDF5_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${HDF5_VERSION}-\${BUILD_TYPE}/share/hdf5\" CACHE PATH \"\")\n")
 endif()
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${HDF5_DIR})\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(HDF5_VERSION \"${HDF5_VERSION}\" CACHE STRING \"\")\n")
+FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${HDF5_DIR})\n")
+FILE(APPEND ${NX_SDK_FILE} "set(HDF5_VERSION \"${HDF5_VERSION}\" CACHE STRING \"\")\n")

@@ -18,7 +18,7 @@ set(ghcFilesystem_GIT_TAG "v1.3.2")
 set(ghcFilesystem_VERSION "1.3.2")
 message(STATUS "Building: ${extProjectName} ${ghcFilesystem_VERSION}:  ghcFilesystem required")
 
-set(ghcFilesystem_INSTALL "${DREAM3D_SDK}/${extProjectName}-${ghcFilesystem_VERSION}")
+set(ghcFilesystem_INSTALL "${NX_SDK}/${extProjectName}-${ghcFilesystem_VERSION}")
 
 if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
@@ -36,11 +36,11 @@ endif()
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
 
-  TMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
-  STAMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/Stamp"
-  DOWNLOAD_DIR ${DREAM3D_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/Download
-  SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/Source"
-  BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/Build/${CMAKE_BUILD_TYPE}"
+  TMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
+  STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/Stamp"
+  DOWNLOAD_DIR ${NX_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/Download
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/Source"
+  BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}-${ghcFilesystem_VERSION}/Build/${CMAKE_BUILD_TYPE}"
   INSTALL_DIR "${ghcFilesystem_INSTALL}"
 
   CMAKE_ARGS
@@ -64,11 +64,11 @@ ExternalProject_Add(${extProjectName}
   LOG_INSTALL 1
 )
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-file(APPEND ${DREAM3D_SDK_FILE} "\n")
-file(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-file(APPEND ${DREAM3D_SDK_FILE} "# GulRok FileSystem\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(ghcFilesystem_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${ghcFilesystem_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${ghcFilesystem_DIR})\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(ghcFilesystem_VERSION \"${ghcFilesystem_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "\n")
+file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+file(APPEND ${NX_SDK_FILE} "# GulRok FileSystem\n")
+file(APPEND ${NX_SDK_FILE} "set(ghcFilesystem_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${ghcFilesystem_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${ghcFilesystem_DIR})\n")
+file(APPEND ${NX_SDK_FILE} "set(ghcFilesystem_VERSION \"${ghcFilesystem_VERSION}\" CACHE STRING \"\")\n")

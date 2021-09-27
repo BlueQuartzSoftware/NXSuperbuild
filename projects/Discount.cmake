@@ -11,9 +11,9 @@ set(discount_VERSION "2.2.3")
 message(STATUS "Building: ${extProjectName} ${discount_VERSION}: -DBUILD_DISCOUNT=${BUILD_DISCOUNT}" )
 
 if(WIN32)
-  set(discount_INSTALL "${DREAM3D_SDK}/${extProjectName}-${discount_VERSION}")
+  set(discount_INSTALL "${NX_SDK}/${extProjectName}-${discount_VERSION}")
 else()
-  set(discount_INSTALL "${DREAM3D_SDK}/${extProjectName}-${discount_VERSION}-${CMAKE_BUILD_TYPE}")
+  set(discount_INSTALL "${NX_SDK}/${extProjectName}-${discount_VERSION}-${CMAKE_BUILD_TYPE}")
 endif()
 
 if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
@@ -31,11 +31,11 @@ endif()
 
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
-  TMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${discount_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
-  STAMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${discount_VERSION}/Stamp"
-  DOWNLOAD_DIR ${DREAM3D_SDK}/superbuild/${extProjectName}-${discount_VERSION}/Download
-  SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${discount_VERSION}/Source"
-  BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${discount_VERSION}/Build/${CMAKE_BUILD_TYPE}"
+  TMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${discount_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
+  STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${discount_VERSION}/Stamp"
+  DOWNLOAD_DIR ${NX_SDK}/superbuild/${extProjectName}-${discount_VERSION}/Download
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${discount_VERSION}/Source"
+  BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}-${discount_VERSION}/Build/${CMAKE_BUILD_TYPE}"
   INSTALL_DIR "${discount_INSTALL}"
 
   CMAKE_ARGS
@@ -60,17 +60,17 @@ ExternalProject_Add(${extProjectName}
   LOG_INSTALL 1
 )
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-FILE(APPEND ${DREAM3D_SDK_FILE} "\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "# Discount\n")
+FILE(APPEND ${NX_SDK_FILE} "\n")
+FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+FILE(APPEND ${NX_SDK_FILE} "# Discount\n")
 if(APPLE)
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(discount_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${discount_VERSION}-\${BUILD_TYPE}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(discount_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${discount_VERSION}-\${BUILD_TYPE}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
 elseif(WIN32)
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(discount_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${discount_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(discount_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${discount_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
 else()
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(discount_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${discount_VERSION}-\${BUILD_TYPE}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(discount_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${discount_VERSION}-\${BUILD_TYPE}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
 endif()
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${discount_DIR})\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(discount_VERSION \"${discount_VERSION}\" CACHE STRING \"\")\n")
+FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${discount_DIR})\n")
+FILE(APPEND ${NX_SDK_FILE} "set(discount_VERSION \"${discount_VERSION}\" CACHE STRING \"\")\n")

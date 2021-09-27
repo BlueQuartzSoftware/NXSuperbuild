@@ -12,10 +12,10 @@ message(STATUS "Building: ${extProjectName} ${qwt_VERSION}: -DBUILD_QWT=${BUILD_
 
 #set(qwt_url "https://github.com/BlueQuartzSoftware/DREAM3DSuperbuild/releases/download/v6.6/${extProjectName}-${qwt_VERSION}.tar.gz")
 
-set(qwt_INSTALL "${DREAM3D_SDK}/${extProjectName}-${qwt_VERSION}-${qt5_version_full}")
+set(qwt_INSTALL "${NX_SDK}/${extProjectName}-${qwt_VERSION}-${qt5_version_full}")
 
-set(qwtConfig_FILE "${DREAM3D_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Build/qwtconfig.pri")
-set(qwtSrcPro_FILE "${DREAM3D_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Build/src.pro")
+set(qwtConfig_FILE "${NX_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Build/qwtconfig.pri")
+set(qwtSrcPro_FILE "${NX_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Build/src.pro")
 set(COMMENT "")
 if(NOT APPLE)
   set(COMMENT "#")
@@ -60,11 +60,11 @@ endif()
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
 
-  TMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/tmp/${CMAKE_BUILD_TYPE}"
-  STAMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Stamp"
-  DOWNLOAD_DIR ${DREAM3D_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}
-  SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Source/${extProjectName}-${qwt_VERSION}"
-  BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Build/${CMAKE_BUILD_TYPE}"
+  TMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/tmp/${CMAKE_BUILD_TYPE}"
+  STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Stamp"
+  DOWNLOAD_DIR ${NX_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Source/${extProjectName}-${qwt_VERSION}"
+  BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}-${qwt_VERSION}-${qt5_version_full}/Build/${CMAKE_BUILD_TYPE}"
   INSTALL_DIR "${qwt_INSTALL}"
 
   CONFIGURE_COMMAND ${Qt5_QMAKE_EXECUTABLE} <SOURCE_DIR>/qwt.pro
@@ -82,10 +82,10 @@ ExternalProject_Add(${extProjectName}
   LOG_INSTALL 1
 )
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-file(APPEND ${DREAM3D_SDK_FILE} "\n")
-file(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-file(APPEND ${DREAM3D_SDK_FILE} "# Qwt ${qwt_VERSION} Library\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(QWT_INSTALL \"\${NX_SDK_ROOT}/${extProjectName}-${qwt_VERSION}-${qt5_version_full}\" CACHE PATH \"\")\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(QWT_VERSION \"${qwt_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "\n")
+file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+file(APPEND ${NX_SDK_FILE} "# Qwt ${qwt_VERSION} Library\n")
+file(APPEND ${NX_SDK_FILE} "set(QWT_INSTALL \"\${NX_SDK_ROOT}/${extProjectName}-${qwt_VERSION}-${qt5_version_full}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(QWT_VERSION \"${qwt_VERSION}\" CACHE STRING \"\")\n")

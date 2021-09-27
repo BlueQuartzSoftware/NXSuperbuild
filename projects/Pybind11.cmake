@@ -11,7 +11,7 @@ set(pybind11_GIT_TAG "v2.6.2")
 set(pybind11_VERSION "2.6.2")
 message(STATUS "Building: ${extProjectName} ${pybind11_VERSION}: -DBUILD_PYBIND11=${BUILD_PYBIND11}" )
 
-set(pybind11_INSTALL "${DREAM3D_SDK}/${extProjectName}-${pybind11_VERSION}")
+set(pybind11_INSTALL "${NX_SDK}/${extProjectName}-${pybind11_VERSION}")
 
 if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
@@ -30,11 +30,11 @@ endif()
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
 
-  TMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
-  STAMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/Stamp"
-  DOWNLOAD_DIR ${DREAM3D_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/Download
-  SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/Source"
-  BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/Build/${CMAKE_BUILD_TYPE}"
+  TMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
+  STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/Stamp"
+  DOWNLOAD_DIR ${NX_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/Download
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/Source"
+  BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}-${pybind11_VERSION}/Build/${CMAKE_BUILD_TYPE}"
   INSTALL_DIR "${pybind11_INSTALL}"
 
   CMAKE_ARGS
@@ -58,11 +58,11 @@ ExternalProject_Add(${extProjectName}
   LOG_INSTALL 1
 )
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-file(APPEND ${DREAM3D_SDK_FILE} "\n")
-file(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-file(APPEND ${DREAM3D_SDK_FILE} "# pybind11\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(pybind11_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${pybind11_VERSION}/share/cmake/${extProjectName}\" CACHE PATH \"\")\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${pybind11_DIR})\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(pybind11_VERSION \"${pybind11_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "\n")
+file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+file(APPEND ${NX_SDK_FILE} "# pybind11\n")
+file(APPEND ${NX_SDK_FILE} "set(pybind11_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${pybind11_VERSION}/share/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${pybind11_DIR})\n")
+file(APPEND ${NX_SDK_FILE} "set(pybind11_VERSION \"${pybind11_VERSION}\" CACHE STRING \"\")\n")

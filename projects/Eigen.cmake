@@ -11,15 +11,15 @@ set(Eigen3_VERSION "3.3.9")
 message(STATUS "Building: ${extProjectName} ${Eigen3_VERSION}: -DBUILD_EIGEN=${BUILD_EIGEN}")
 set(Eigen_GIT_TAG ${Eigen3_VERSION})
 
-set(SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/Source/${extProjectName}")
+set(SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/Source/${extProjectName}")
 
-set(Eigen_INSTALL "${DREAM3D_SDK}/${extProjectName}-${Eigen3_VERSION}")
+set(Eigen_INSTALL "${NX_SDK}/${extProjectName}-${Eigen3_VERSION}")
 
 get_filename_component(_self_dir ${CMAKE_CURRENT_LIST_FILE} PATH)
 
 configure_file(
   "${_self_dir}/patches/Eigen_DartConfiguration.tcl.in"
-  "${DREAM3D_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/Build/${CMAKE_BUILD_TYPE}/DartConfiguration.tcl"
+  "${NX_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/Build/${CMAKE_BUILD_TYPE}/DartConfiguration.tcl"
   @ONLY
 )
 
@@ -37,15 +37,15 @@ else()
   )
 endif()
 
-set_property(DIRECTORY PROPERTY EP_BASE ${DREAM3D_SDK}/superbuild)
+set_property(DIRECTORY PROPERTY EP_BASE ${NX_SDK}/superbuild)
 
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
-  TMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
-  STAMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/Stamp/${CMAKE_BUILD_TYPE}"
-  DOWNLOAD_DIR ${DREAM3D_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}
+  TMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
+  STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/Stamp/${CMAKE_BUILD_TYPE}"
+  DOWNLOAD_DIR ${NX_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}
   SOURCE_DIR "${SOURCE_DIR}"
-  BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/Build/${CMAKE_BUILD_TYPE}"
+  BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}-${Eigen3_VERSION}/Build/${CMAKE_BUILD_TYPE}"
   INSTALL_DIR "${Eigen_INSTALL}"
 
   CMAKE_ARGS
@@ -70,12 +70,12 @@ ExternalProject_Add(${extProjectName}
   LOG_INSTALL 1
 )
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-set(Eigen3_DIR "${DREAM3D_SDK}/Eigen-${Eigen3_VERSION}/share/eigen3/cmake" CACHE PATH "" FORCE)
+set(Eigen3_DIR "${NX_SDK}/Eigen-${Eigen3_VERSION}/share/eigen3/cmake" CACHE PATH "" FORCE)
 
-file(APPEND ${DREAM3D_SDK_FILE} "\n")
-file(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-file(APPEND ${DREAM3D_SDK_FILE} "# Eigen3 Library Location\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(Eigen3_DIR \"\${NX_SDK_ROOT}/Eigen-${Eigen3_VERSION}/share/eigen3/cmake\" CACHE PATH \"\")\n")
-file(APPEND ${DREAM3D_SDK_FILE} "set(Eigen3_VERSION \"${Eigen3_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "\n")
+file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+file(APPEND ${NX_SDK_FILE} "# Eigen3 Library Location\n")
+file(APPEND ${NX_SDK_FILE} "set(Eigen3_DIR \"\${NX_SDK_ROOT}/Eigen-${Eigen3_VERSION}/share/eigen3/cmake\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(Eigen3_VERSION \"${Eigen3_VERSION}\" CACHE STRING \"\")\n")

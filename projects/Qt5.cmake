@@ -97,13 +97,13 @@ if(NOT INSTALL_QT5 AND NOT "${Qt5_QMAKE_EXECUTABLE}" STREQUAL "")
   )
 
   set(extProjectName "Qt${qt5_version_full}")
-  message(STATUS "USING: Qt ${qt5_version_full}: -DQt5_QMAKE_EXECUTABLE=${Qt5_QMAKE_EXECUTABLE}" )
+  message(STATUS "Installed: Qt ${qt5_version_full}: -DQt5_QMAKE_EXECUTABLE=${Qt5_QMAKE_EXECUTABLE}" )
 
-  FILE(APPEND ${DREAM3D_SDK_FILE} "\n")
-  FILE(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-  FILE(APPEND ${DREAM3D_SDK_FILE} "# Qt5 ${qt5_version_full} Library\n")
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(Qt5_DIR \"${QT_INSTALL_LIBS}/cmake/Qt5\" CACHE PATH \"\")\n")
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${Qt5_DIR})\n")
+  FILE(APPEND ${NX_SDK_FILE} "\n")
+  FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+  FILE(APPEND ${NX_SDK_FILE} "# Qt5 ${qt5_version_full} Library\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(Qt5_DIR \"${QT_INSTALL_LIBS}/cmake/Qt5\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${Qt5_DIR})\n")
   return()
 endif()
 
@@ -111,12 +111,12 @@ if("${INSTALL_QT5}")
   message(STATUS "Building: ${extProjectName} ${qt5_version_full}: -DINSTALL_QT5=${INSTALL_QT5}" )
 endif()
 
-set(qt5_INSTALL "${DREAM3D_SDK}/${extProjectName}${qt5_version_full}")
-set(qt5_BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}/Build")
+set(qt5_INSTALL "${NX_SDK}/${extProjectName}${qt5_version_full}")
+set(qt5_BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}/Build")
 
 get_filename_component(_self_dir ${CMAKE_CURRENT_LIST_FILE} PATH)
 
-set(QT_INSTALL_LOCATION "${DREAM3D_SDK}/${extProjectName}")
+set(QT_INSTALL_LOCATION "${NX_SDK}/${extProjectName}")
 
 if(APPLE)
   set(qt5_Headless_FILE "apple/Qt_HeadlessInstall_OSX.js")
@@ -137,7 +137,7 @@ if(MSVC_VERSION GREATER 1900)
   set(QT_MSVC_VERSION_NAME "msvc2017_64")
 endif()
 
-set(JSFILE "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.js")
+set(JSFILE "${NX_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.js")
 configure_file(
   "${_self_dir}/${qt5_Headless_FILE}"
   "${JSFILE}"
@@ -155,7 +155,7 @@ if(APPLE)
 
   set(Qt5_OSX_BASE_NAME qt-opensource-mac-x64-${qt5_version_full})
 
-  set(Qt5_OSX_DMG_ABS_PATH "${DREAM3D_SDK}/superbuild/${extProjectName}/${Qt5_OSX_BASE_NAME}.dmg")
+  set(Qt5_OSX_DMG_ABS_PATH "${NX_SDK}/superbuild/${extProjectName}/${Qt5_OSX_BASE_NAME}.dmg")
   set(Qt5_DMG ${Qt5_OSX_DMG_ABS_PATH})
 
   configure_file(
@@ -179,8 +179,8 @@ if(APPLE)
     message(STATUS "    This may take some time for the installer to start.")
     message(STATUS "    Please wait for the installer to finish.")
     execute_process(COMMAND "${CMAKE_BINARY_DIR}/Qt5_osx_install.sh"
-                    OUTPUT_FILE "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/Qt5-offline-out.log"
-                    ERROR_FILE "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/Qt5-offline-err.log"
+                    OUTPUT_FILE "${NX_SDK}/superbuild/${extProjectName}/Download/Qt5-offline-out.log"
+                    ERROR_FILE "${NX_SDK}/superbuild/${extProjectName}/Download/Qt5-offline-err.log"
                     ERROR_VARIABLE mount_error
                     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     )
@@ -192,25 +192,25 @@ elseif(WIN32)
   set(qt5_online_installer "qt-opensource-windows-x86-${qt5_version_full}.exe")
   set(qt5_url "${qt5_url}/${qt5_version_major}/${qt5_version_short}/qt-opensource-windows-x86-${qt5_version_full}.exe")
 
-  if(NOT EXISTS "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}")
+  if(NOT EXISTS "${NX_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}")
     message(STATUS "===============================================================")
     message(STATUS "   Downloading ${extProjectName}")
     message(STATUS "   Large Download!! This can take a bit... Please be patient")
-    file(DOWNLOAD ${qt5_url} "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}" SHOW_PROGRESS)
+    file(DOWNLOAD ${qt5_url} "${NX_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}" SHOW_PROGRESS)
   endif()
 
-  set(QT5_ONLINE_INSTALLER "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}")
+  set(QT5_ONLINE_INSTALLER "${NX_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}")
   configure_file(
     "${_self_dir}/win32/Qt_HeadlessInstall.bat"
-    "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.bat"
+    "${NX_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.bat"
     @ONLY
   )
 
-  if(NOT EXISTS "${DREAM3D_SDK}/${extProjectName}")
+  if(NOT EXISTS "${NX_SDK}/${extProjectName}")
     message(STATUS "Executing the Qt5 Installer... ")
-    execute_process(COMMAND "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.bat"
-                    OUTPUT_FILE "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/qt-unified-out.log"
-                    ERROR_FILE "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/qt-unified-err.log"
+    execute_process(COMMAND "${NX_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.bat"
+                    OUTPUT_FILE "${NX_SDK}/superbuild/${extProjectName}/Download/qt-unified-out.log"
+                    ERROR_FILE "${NX_SDK}/superbuild/${extProjectName}/Download/qt-unified-err.log"
                     ERROR_VARIABLE installer_error
                     WORKING_DIRECTORY ${qt5_BINARY_DIR} )
   endif()
@@ -219,24 +219,24 @@ else()
   set(qt5_online_installer "qt-opensource-linux-x64-${qt5_version_full}.run")
   set(qt5_url "${qt5_url}/${qt5_version_major}${qt5_version_short}/${qt5_online_installer}")
 
-  if(NOT EXISTS "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}")
+  if(NOT EXISTS "${NX_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}")
     message(STATUS "===============================================================")
     message(STATUS "   Downloading ${extProjectName}")
     message(STATUS "   Large Download!! This can take a bit... Please be patient")
-    file(DOWNLOAD ${qt5_url} "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}" SHOW_PROGRESS)
+    file(DOWNLOAD ${qt5_url} "${NX_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}" SHOW_PROGRESS)
   endif()
 
-  set(QT5_ONLINE_INSTALLER "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}")
+  set(QT5_ONLINE_INSTALLER "${NX_SDK}/superbuild/${extProjectName}/Download/${qt5_online_installer}")
   configure_file(
     "${_self_dir}/unix/Qt5_linux_install.sh.in"
-    "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.sh"
+    "${NX_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.sh"
   )
 
-  if(NOT EXISTS "${DREAM3D_SDK}/${extProjectName}")
+  if(NOT EXISTS "${NX_SDK}/${extProjectName}")
     message(STATUS "Executing the Qt5 Installer... ")
-    execute_process(COMMAND "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.sh"
-                    OUTPUT_FILE "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/qt-unified-out.log"
-                    ERROR_FILE "${DREAM3D_SDK}/superbuild/${extProjectName}/Download/qt-unified-err.log"
+    execute_process(COMMAND "${NX_SDK}/superbuild/${extProjectName}/Download/Qt_HeadlessInstall.sh"
+                    OUTPUT_FILE "${NX_SDK}/superbuild/${extProjectName}/Download/qt-unified-out.log"
+                    ERROR_FILE "${NX_SDK}/superbuild/${extProjectName}/Download/qt-unified-err.log"
                     ERROR_VARIABLE installer_error
                     WORKING_DIRECTORY ${qt5_BINARY_DIR} )
   endif()
@@ -247,12 +247,12 @@ endif()
 
 ExternalProject_Add(Qt5
 
-  TMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}/tmp/${CMAKE_BUILD_TYPE}"
-  STAMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}/Stamp/${CMAKE_BUILD_TYPE}"
-  DOWNLOAD_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}/Download"
-  SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}/Source"
-  BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}/Build"
-  INSTALL_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}/Install"
+  TMP_DIR "${NX_SDK}/superbuild/${extProjectName}/tmp/${CMAKE_BUILD_TYPE}"
+  STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}/Stamp/${CMAKE_BUILD_TYPE}"
+  DOWNLOAD_DIR "${NX_SDK}/superbuild/${extProjectName}/Download"
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}/Source"
+  BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}/Build"
+  INSTALL_DIR "${NX_SDK}/superbuild/${extProjectName}/Install"
 
   DOWNLOAD_COMMAND ""
   UPDATE_COMMAND ""
@@ -263,18 +263,18 @@ ExternalProject_Add(Qt5
   TEST_COMMAND ""
   )
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-FILE(APPEND ${DREAM3D_SDK_FILE} "\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "# Qt ${qt5_version_full} Library\n")
+FILE(APPEND ${NX_SDK_FILE} "\n")
+FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+FILE(APPEND ${NX_SDK_FILE} "# Qt ${qt5_version_full} Library\n")
 if(APPLE)
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(Qt5_DIR \"\${NX_SDK_ROOT}/${extProjectName}/${qt5_version_short}/clang_64/lib/cmake/Qt5\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(Qt5_DIR \"\${NX_SDK_ROOT}/${extProjectName}/${qt5_version_short}/clang_64/lib/cmake/Qt5\" CACHE PATH \"\")\n")
 elseif(WIN32)
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(Qt5_DIR \"\${NX_SDK_ROOT}/${extProjectName}/${qt5_version_short}/${QT_MSVC_VERSION_NAME}/lib/cmake/Qt5\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(Qt5_DIR \"\${NX_SDK_ROOT}/${extProjectName}/${qt5_version_short}/${QT_MSVC_VERSION_NAME}/lib/cmake/Qt5\" CACHE PATH \"\")\n")
 else()
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(Qt5_DIR \"\${NX_SDK_ROOT}/${extProjectName}/${qt5_version_short}/gcc_64/lib/cmake/Qt5\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(Qt5_DIR \"\${NX_SDK_ROOT}/${extProjectName}/${qt5_version_short}/gcc_64/lib/cmake/Qt5\" CACHE PATH \"\")\n")
 endif()
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${Qt5_DIR})\n")
+FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${Qt5_DIR})\n")
 
 

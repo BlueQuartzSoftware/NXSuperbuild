@@ -28,7 +28,7 @@ For more information, please visit [Installing a Compiler Suite](http://www.drea
 
 #### Basic Setup ####
 
-**1: Create a folder called DREAM3D_SDK in the /Users/Shared folder**
+**1: Create a folder called NX_SDK in the /Users/Shared folder**
 ![](Images/OSX/create_sdk_folder.png)
 
 **2: Download and install CMake from https://cmake.org/download:**
@@ -39,7 +39,7 @@ Press the download link to download the tar.gz file of the latest release of CMa
 
 Click on the tar.gz file that you just downloaded to expand it into a folder.
 
-Move the newly expanded folder into the **DREAM3D_SDK** folder that we created earlier.
+Move the newly expanded folder into the **NX_SDK** folder that we created earlier.
 ![](Images/OSX/cmake_in_sdk_folder.png)
 
 **3: Download and install the "Ninja" build system from https://github.com/ninja-build/ninja/releases:**
@@ -80,12 +80,12 @@ Create a folder called **Workspace** in your home directory, and then use git to
 3. We are going to create a CMake variable.  Press the **Add Entry** button.
 ![](Images/OSX/add_entry.png)
 
-4. Set the **Name** to *DREAM3D_SDK*.  Set the **Type** to *PATH* and set the **Value** to the location of the DREAM3D_SDK folder that we created earlier (*/Users/Shared/DREAM3D_SDK*)
+4. Set the **Name** to *NX_SDK*.  Set the **Type** to *PATH* and set the **Value** to the location of the NX_SDK folder that we created earlier (*/Users/Shared/NX_SDK*)
 ![](Images/OSX/create_cmake_variable.png)
 
 5. Repeat steps 3 & 4, except set **Name** to *CMAKE_MAKE_PROGRAM*, **Type** to *FILEPATH*, and **Value** to the path to our ninja executable that we added earlier (*/usr/local/bin/ninja*).
 
-6. You should now have two variables, DREAM3D_SDK and CMAKE_MAKE_PROGRAM.
+6. You should now have two variables, NX_SDK and CMAKE_MAKE_PROGRAM.
 ![](Images/OSX/cmake_before_configuration.png)
 
 7. Press the **Configure** button in CMake. At this point, Qt 5 will be automatically downloaded and installed.  Since the Qt download is over 1 GB in size, this may take some time so please be patient.
@@ -122,13 +122,13 @@ Sometimes there is a pause between the download completing and the installer pop
 
     It will build the Release version of the SDK.  Please be patient, it takes a while to build all the dependent libraries.
 
-16. Navigate to **/Users/Shared/DREAM3D_SDK**. This is your newly created SDK and can be used to compile DREAM.3D.
+16. Navigate to **/Users/Shared/NX_SDK**. This is your newly created SDK and can be used to compile DREAM.3D.
 
 ## Building DREAM.3D ##
 
 Now that you have all of the dependent libraries built you are now ready to compile DREAM.3D. For the examples below we are going to assume the following folder structure:
 
-* DREAM3D_SDK is located at /Users/Shared/DREAM3D_SDK
+* NX_SDK is located at /Users/Shared/NX_SDK
 * DREAM3D_WORKSPACE is located at /Users/[USERNAME\]/Workspace
 
 There are 6 basic git repositories that need to be cloned:

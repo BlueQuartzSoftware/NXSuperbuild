@@ -11,9 +11,9 @@ set(haru_VERSION "2.0.0")
 message(STATUS "Building: ${extProjectName} ${haru_VERSION}: -DBUILD_HARU=${BUILD_HARU}" )
 
 if(WIN32)
-  set(haru_INSTALL "${DREAM3D_SDK}/${extProjectName}-${haru_VERSION}")
+  set(haru_INSTALL "${NX_SDK}/${extProjectName}-${haru_VERSION}")
 else()
-  set(haru_INSTALL "${DREAM3D_SDK}/${extProjectName}-${haru_VERSION}-${CMAKE_BUILD_TYPE}")
+  set(haru_INSTALL "${NX_SDK}/${extProjectName}-${haru_VERSION}-${CMAKE_BUILD_TYPE}")
 endif()
 
 if(NOT APPLE AND NOT WIN32)
@@ -37,11 +37,11 @@ endif()
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
 
-  TMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${haru_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
-  STAMP_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${haru_VERSION}/Stamp"
-  DOWNLOAD_DIR ${DREAM3D_SDK}/superbuild/${extProjectName}-${haru_VERSION}/Download
-  SOURCE_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${haru_VERSION}/Source"
-  BINARY_DIR "${DREAM3D_SDK}/superbuild/${extProjectName}-${haru_VERSION}/Build/${CMAKE_BUILD_TYPE}"
+  TMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${haru_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
+  STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${haru_VERSION}/Stamp"
+  DOWNLOAD_DIR ${NX_SDK}/superbuild/${extProjectName}-${haru_VERSION}/Download
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${haru_VERSION}/Source"
+  BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}-${haru_VERSION}/Build/${CMAKE_BUILD_TYPE}"
   INSTALL_DIR "${haru_INSTALL}"
 
   CMAKE_ARGS
@@ -65,17 +65,17 @@ ExternalProject_Add(${extProjectName}
   LOG_INSTALL 1
 )
 
-#-- Append this information to the DREAM3D_SDK CMake file that helps other developers
+#-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
-FILE(APPEND ${DREAM3D_SDK_FILE} "\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "# haru\n")
+FILE(APPEND ${NX_SDK_FILE} "\n")
+FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
+FILE(APPEND ${NX_SDK_FILE} "# haru\n")
 if(APPLE)
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(libharu_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${haru_VERSION}-\${BUILD_TYPE}/cmake/lib${extProjectName}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(libharu_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${haru_VERSION}-\${BUILD_TYPE}/cmake/lib${extProjectName}\" CACHE PATH \"\")\n")
 elseif(WIN32)
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(libharu_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${haru_VERSION}/cmake/lib${extProjectName}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(libharu_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${haru_VERSION}/cmake/lib${extProjectName}\" CACHE PATH \"\")\n")
 else()
-  FILE(APPEND ${DREAM3D_SDK_FILE} "set(libharu_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${haru_VERSION}-\${BUILD_TYPE}/cmake/lib${extProjectName}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(libharu_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${haru_VERSION}-\${BUILD_TYPE}/cmake/lib${extProjectName}\" CACHE PATH \"\")\n")
 endif()
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${libharu_DIR})\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(libharu_VERSION \"${haru_VERSION}\" CACHE STRING \"\")\n")
+FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${libharu_DIR})\n")
+FILE(APPEND ${NX_SDK_FILE} "set(libharu_VERSION \"${haru_VERSION}\" CACHE STRING \"\")\n")

@@ -55,19 +55,19 @@ RUN /usr/bin/pip3 install mkdocs-material numpy imageio
 
 
 # Define the remaining variables that will be needed during the build of the image
-ENV DREAM3D_SDK=/opt/DREAM3D_SDK
+ENV NX_SDK=/opt/NX_SDK
 ENV CMAKE_BUILD_TYPE=Release
 ENV GIT_BRANCH=develop
 ENV WORKSPACE=/opt/DREAM3D-Dev
-ENV SDK_SOURCE_DIR=$DREAM3D_SDK/dream3dsuperbuild
+ENV SDK_SOURCE_DIR=$NX_SDK/dream3dsuperbuild
 ENV SDK_BUILD_DIR=$SDK_SOURCE_DIR/$CMAKE_BUILD_TYPE
 ENV WORKSPACE_BUILD=$WORKSPACE/Build
 
-# Create the DREAM3D_SDK Directory
-RUN mkdir -p $DREAM3D_SDK && \
-  chmod -R 0777 $DREAM3D_SDK && \
+# Create the NX_SDK Directory
+RUN mkdir -p $NX_SDK && \
+  chmod -R 0777 $NX_SDK && \
   # Install CMake 3.x
-  cd $DREAM3D_SDK && \
+  cd $NX_SDK && \
   wget https://cmake.org/files/v$CMAKE_VERSION/$CMAKE_NAME.tar.gz && \
   tar -xzf $CMAKE_NAME.tar.gz && \
   rm -rf $CMAKE_NAME.tar.tgz
@@ -76,13 +76,13 @@ RUN mkdir -p $DREAM3D_SDK && \
 RUN echo "Cloning DREAM3DSuperbuild..." && \
   PATH=$PATH:/opt/qt515/bin && \
   # clone the DREAM3DSuperbuild repo
-  cd $DREAM3D_SDK && \
+  cd $NX_SDK && \
   git clone -b develop https://github.com/bluequartzsoftware/dream3dsuperbuild && \
   # Create a directory for the CMake configuration of the DREAM3D SDK
   mkdir -p $SDK_BUILD_DIR && \
   cd $SDK_BUILD_DIR && \
-  $DREAM3D_SDK/$CMAKE_NAME/bin/cmake \
-  -DDREAM3D_SDK=$DREAM3D_SDK \
+  $NX_SDK/$CMAKE_NAME/bin/cmake \
+  -DNX_SDK=$NX_SDK \
   -DINSTALL_QT5=OFF \
   -DBUILD_TBB=ON \
   -DQt5_QMAKE_EXECUTABLE=/opt/qt${QT_MAJOR}${QT_MINOR}/bin/qmake \
@@ -97,20 +97,20 @@ RUN echo "Cloning DREAM3DSuperbuild..." && \
 RUN cd $SDK_BUILD_DIR && \
   export PATH=$PATH:/opt/qt${QT_MAJOR}${QT_MAJOR}/bin && \
   make -j "$(nproc)" && \
-  cd $DREAM3D_SDK/DREAM3D_Data/Data && \
+  cd $NX_SDK/DREAM3D_Data/Data && \
   tar -xzf SmallIN100.tar.gz && \
   tar -xzf Image.tar.gz && \
-  # Remove the entire DREAM3D_SDK Build directory
-  rm $DREAM3D_SDK/cmake-$CMAKE_VERSION.$CMAKE_PATCH-Linux-x86_64.tar.gz && \
-  rm -rf $DREAM3D_SDK/superbuild/CMP && \
-  rm -rf $DREAM3D_SDK/superbuild/discount && \
-  rm -rf $DREAM3D_SDK/superbuild/DREAM3D_Data && \
-  rm -rf $DREAM3D_SDK/superbuild/Eigen && \
-  rm -rf $DREAM3D_SDK/superbuild/haru && \
-  rm -rf $DREAM3D_SDK/superbuild/hdf5 && \
-  rm -rf $DREAM3D_SDK/superbuild/pybind11 && \
-  rm -rf $DREAM3D_SDK/superbuild/qwt && \
-  rm -rf $DREAM3D_SDK/superbuild/tbb
+  # Remove the entire NX_SDK Build directory
+  rm $NX_SDK/cmake-$CMAKE_VERSION.$CMAKE_PATCH-Linux-x86_64.tar.gz && \
+  rm -rf $NX_SDK/superbuild/CMP && \
+  rm -rf $NX_SDK/superbuild/discount && \
+  rm -rf $NX_SDK/superbuild/DREAM3D_Data && \
+  rm -rf $NX_SDK/superbuild/Eigen && \
+  rm -rf $NX_SDK/superbuild/haru && \
+  rm -rf $NX_SDK/superbuild/hdf5 && \
+  rm -rf $NX_SDK/superbuild/pybind11 && \
+  rm -rf $NX_SDK/superbuild/qwt && \
+  rm -rf $NX_SDK/superbuild/tbb
 
 # Clone all of the DREAM3D Sources
 RUN mkdir -p $WORKSPACE && \
@@ -132,9 +132,9 @@ RUN mkdir -p $WORKSPACE && \
 # Configure DREAM3D to build 
 RUN mkdir -p $WORKSPACE_BUILD && \
   cd $WORKSPACE_BUILD && \
-  $DREAM3D_SDK/$CMAKE_NAME/bin/cmake \
+  $NX_SDK/$CMAKE_NAME/bin/cmake \
   -G Ninja \
-  -DDREAM3D_SDK=$DREAM3D_SDK \
+  -DNX_SDK=$NX_SDK \
   -DQt5_DIR=/opt/qt515/lib/cmake/Qt5 \
   -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
   -DSIMPL_EMBED_PYTHON=ON \
@@ -143,7 +143,7 @@ RUN mkdir -p $WORKSPACE_BUILD && \
 
 # Compile DREAM3D 
 RUN cd $WORKSPACE_BUILD && \
-  $DREAM3D_SDK/$CMAKE_NAME/bin/cmake --build . --target all
+  $NX_SDK/$CMAKE_NAME/bin/cmake --build . --target all
 
 # We might want to create a Python Virtual Environment and install DREAM3D into that?
 
@@ -153,7 +153,7 @@ RUN echo "#!/bin/bash" > /build.sh && \
   echo "set -e" >> build.sh >> /build.sh && \
   echo "cd $WORKSPACE_BUILD" >> /build.sh && \
   echo "export PATH=$PATH:$WORKSPACE_BUILD/Bin" >> /build.sh && \
-  echo "$DREAM3D_SDK/cmake-$CMAKE_VERSION.$CMAKE_PATCH-Linux-x86_64/bin/ctest --verbose -R" >> build.sh && \
+  echo "$NX_SDK/cmake-$CMAKE_VERSION.$CMAKE_PATCH-Linux-x86_64/bin/ctest --verbose -R" >> build.sh && \
   chmod u+x /build.sh
 
 ENTRYPOINT ["/build.sh"]

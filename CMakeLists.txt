@@ -34,22 +34,15 @@ include(ProcessorCount)
 ProcessorCount(CoreCount)
 
 
-if( "${DREAM3D_SDK}" STREQUAL "")
-  message(FATAL_ERROR "Please specify the DREAM3D_SDK cmake variable which is the top level directory where all the DREAM.3D dependent libraries will be built")
+if( "${NX_SDK}" STREQUAL "")
+  message(FATAL_ERROR "Please specify the NX_SDK cmake variable which is the top level directory where all the DREAM.3D dependent libraries will be built")
 endif()
 
-if( "${DREAM3D_WORKSPACE}" STREQUAL "${DREAM3D_SDK}")
-  message(STATUS "DREAM3D_SDK=${DREAM3D_SDK}")
-  message(STATUS "DREAM3D_WORKSPACE=${DREAM3D_WORKSPACE}")
-  message(FATAL_ERROR "Please specify a directory where the source codes for DREAM3D will be cloned into. That directory can not be the same as the DREAM3D_SDK directory")
-endif()
+set(NX_SDK_FILE ${NX_SDK}/NX.cmake)
+set(download_dir ${NX_SDK})
 
-set(DREAM3D_SDK_FILE ${DREAM3D_SDK}/NX.cmake)
-set(download_dir ${DREAM3D_SDK})
-
-
-message(STATUS "DREAM3D_SDK Folder: ${DREAM3D_SDK}")
-message(STATUS "NX_SDK_FILE:   ${DREAM3D_SDK_FILE}")
+message(STATUS "NX_SDK Folder: ${NX_SDK}")
+message(STATUS "NX_SDK_FILE:   ${NX_SDK_FILE}")
 
 #------------------------------------------------------------------------------
 # Set the custom download location for all of the sources
@@ -108,30 +101,30 @@ if(APPLE)
 
   endif()
   message(STATUS "CMAKE_HOST_SYSTEM_PROCESSOR: ${CMAKE_HOST_SYSTEM_PROCESSOR}")
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/projects/apple/OSX_DREAM3D_SDK.cmake
-              ${DREAM3D_SDK}/NX.cmake @ONLY )
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/projects/apple/OSX_NX_SDK.cmake
+              ${NX_SDK}/NX.cmake @ONLY )
 elseif(WIN32)
 
   if(MSVC_VERSION LESS 1910)
     message(FATAL_ERROR "Visual Studio Version 16 2017 or greater is required.")
   endif()
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/projects/win32/WIN_DREAM3D_SDK.cmake
-              ${DREAM3D_SDK}/NX.cmake COPYONLY )
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/projects/win32/WIN_NX_SDK.cmake
+              ${NX_SDK}/NX.cmake COPYONLY )
 else()
 
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/projects/unix/Linux_DREAM3D_SDK.cmake
-              ${DREAM3D_SDK}/NX.cmake COPYONLY )
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/projects/unix/Linux_NX_SDK.cmake
+              ${NX_SDK}/NX.cmake COPYONLY )
 endif()
 
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(DREAM3D_SDK_VERSION ${DREAM3DSuperBuild_VERSION})\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(BUILD_SHARED_LIBS ON CACHE BOOL \"\")\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(NX_SDK_ROOT \"${DREAM3D_SDK}\")\n")
+FILE(APPEND ${NX_SDK_FILE} "set(NX_SDK_VERSION ${DREAM3DSuperBuild_VERSION})\n")
+FILE(APPEND ${NX_SDK_FILE} "\n")
+FILE(APPEND ${NX_SDK_FILE} "set(BUILD_SHARED_LIBS ON CACHE BOOL \"\")\n")
+FILE(APPEND ${NX_SDK_FILE} "set(NX_SDK_ROOT \"${NX_SDK}\")\n")
 
 
-FILE(APPEND ${DREAM3D_SDK_FILE} "\n#--------------------------------------------------------------------------------------------------\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "# Always write out the compile_commands.json file to help out things like QtCreator and VS Code\n")
-FILE(APPEND ${DREAM3D_SDK_FILE} "set(CMAKE_EXPORT_COMPILE_COMMANDS ON)\n")
+FILE(APPEND ${NX_SDK_FILE} "\n#--------------------------------------------------------------------------------------------------\n")
+FILE(APPEND ${NX_SDK_FILE} "# Always write out the compile_commands.json file to help out things like QtCreator and VS Code\n")
+FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_EXPORT_COMPILE_COMMANDS ON)\n")
 
 
 include(nlohmann_json)
@@ -139,24 +132,26 @@ include(HDF5)
 include(Pybind11)
 include(Eigen)
 include(catch2)
+include(nod)
 include(fmt)
 include(expected-lite)
+#--------------------------------------------------------------------------------------------------
+# Install or figure out where Qt5 is installed, then build Qwt based on that information
+#--------------------------------------------------------------------------------------------------
+include(Qt5)
+#--------------------------------------------------------------------------------------------------
+# Build VTK, which depends on finding Qt5
+#--------------------------------------------------------------------------------------------------
 include(VTK)
-include(ITK5)
-# include(Python)
-# include(Discount)
-# include(TBB)
-# include(Haru)
-# include(Boost)
 
+include(ITK5)
 #--------------------------------------------------------------------------------------------------
 # If we are on Apple we need a FileSystem compatible with macOS < 10.15 or GCC < version 9
 #--------------------------------------------------------------------------------------------------
 include(ghcFileSystem)
 
-#--------------------------------------------------------------------------------------------------
-# Install or figure out where Qt5 is installed, then build Qwt based on that information
-#--------------------------------------------------------------------------------------------------
-include(Qt5)
+
+
+
 
 
