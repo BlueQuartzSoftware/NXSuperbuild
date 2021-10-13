@@ -136,6 +136,8 @@ include(nod)
 include(fmt)
 include(expected-lite)
 include(span-lite)
+include(mp11)
+
 #--------------------------------------------------------------------------------------------------
 # Install or figure out where Qt5 is installed, then build Qwt based on that information
 #--------------------------------------------------------------------------------------------------
