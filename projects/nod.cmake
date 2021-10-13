@@ -53,7 +53,7 @@ ExternalProject_Add(${extProjectName}
 #-- configure DREAM3D for building
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-file(APPEND ${NX_SDK_FILE} "# fmt\n")
+file(APPEND ${NX_SDK_FILE} "# nod dir\n")
 file(APPEND ${NX_SDK_FILE} "set(nod_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${nod_VERSION}/share/${extProjectName}\" CACHE PATH \"\")\n")
 file(APPEND ${NX_SDK_FILE} "set(nod_INCLUDE_DIRS \"\${NX_SDK_ROOT}/${extProjectName}-${nod_VERSION}/include\" CACHE PATH \"\")\n")
 file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${nod_DIR})\n")
