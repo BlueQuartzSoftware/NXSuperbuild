@@ -153,8 +153,38 @@ include(ITK5)
 #--------------------------------------------------------------------------------------------------
 include(ghcFileSystem)
 
+#--------------------------------------------------------------------------------------------------
+# 
+#--------------------------------------------------------------------------------------------------
+file(APPEND ${NX_SDK_FILE} "\n\n\nif(0)\nset(COMPLEX_PLUGIN_SEARCH_DIRS ${NX_SDK}/../complex_plugins ${NX_SDK}/../complex_plugins_private)\n")
 
-
+file(APPEND ${NX_SDK_FILE} "\n")
+file(APPEND ${NX_SDK_FILE} "set(COMPLEX_EXTRA_PLUGINS\n")
+file(APPEND ${NX_SDK_FILE} "  Core\n")
+file(APPEND ${NX_SDK_FILE} "  # AFRLDistributionC\n")
+file(APPEND ${NX_SDK_FILE} "  BrukerIntegration\n")
+file(APPEND ${NX_SDK_FILE} "  CAxisByPolarizedLight\n")
+file(APPEND ${NX_SDK_FILE} "  # CRADA3DSystems\n")
+file(APPEND ${NX_SDK_FILE} "  DREAM3DReview\n")
+file(APPEND ${NX_SDK_FILE} "  # ECAccess\n")
+file(APPEND ${NX_SDK_FILE} "  EMMPM\n")
+file(APPEND ${NX_SDK_FILE} "  Generic\n")
+file(APPEND ${NX_SDK_FILE} "  ImageProcessing\n")
+file(APPEND ${NX_SDK_FILE} "  ImportExport\n")
+file(APPEND ${NX_SDK_FILE} "  ITKImageProcessing\n")
+file(APPEND ${NX_SDK_FILE} "  NETLIntegration\n")
+file(APPEND ${NX_SDK_FILE} "  OrientationAnalysis\n")
+file(APPEND ${NX_SDK_FILE} "  Processing\n")
+file(APPEND ${NX_SDK_FILE} "  ProgWorkshop\n")
+file(APPEND ${NX_SDK_FILE} "  Reconstruction\n")
+file(APPEND ${NX_SDK_FILE} "  Sampling\n")
+file(APPEND ${NX_SDK_FILE} "  SimulationIO\n")
+file(APPEND ${NX_SDK_FILE} "  StatsToolbox\n")
+file(APPEND ${NX_SDK_FILE} "  SurfaceMeshing\n")
+file(APPEND ${NX_SDK_FILE} "  SyntheticBuilding\n")
+file(APPEND ${NX_SDK_FILE} "  UCSBUtilities\n")
+file(APPEND ${NX_SDK_FILE} "  VolumeMeshing\n")
+file(APPEND ${NX_SDK_FILE} ")\n\nendif()\n\n")
 
 
 
