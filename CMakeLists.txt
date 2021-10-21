@@ -82,7 +82,7 @@ if(APPLE)
     message(STATUS "Found macOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} as the host. Darwin Version:${DARWIN_VERSION}")
   ENDIF ()
 
-  IF (DARWIN_VERSION EQUAL 21) # macOS 12.00 Monterey (Xcode 12.x)
+  IF (DARWIN_VERSION EQUAL 21) # macOS 12.00 Monterey (Xcode 12.x/Xcode 13.x)
     set(MACOS_NAME "Monterey")
     set(OSX_DEPLOYMENT_TARGET "12.00")
     set(OSX_SDK "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk")
@@ -126,7 +126,7 @@ FILE(APPEND ${NX_SDK_FILE} "\n#-------------------------------------------------
 FILE(APPEND ${NX_SDK_FILE} "# Always write out the compile_commands.json file to help out things like QtCreator and VS Code\n")
 FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_EXPORT_COMPILE_COMMANDS ON)\n")
 
-
+include(oneTBB)
 include(nlohmann_json)
 include(HDF5)
 include(Pybind11)
@@ -139,15 +139,20 @@ include(span-lite)
 include(mp11)
 
 #--------------------------------------------------------------------------------------------------
-# Install or figure out where Qt5 is installed, then build Qwt based on that information
+# Install or figure out where Qt5 is installed
 #--------------------------------------------------------------------------------------------------
 include(Qt5)
+
 #--------------------------------------------------------------------------------------------------
 # Build VTK, which depends on finding Qt5
 #--------------------------------------------------------------------------------------------------
 include(VTK)
 
+#--------------------------------------------------------------------------------------------------
+# Build ITK
+#--------------------------------------------------------------------------------------------------
 include(ITK5)
+
 #--------------------------------------------------------------------------------------------------
 # If we are on Apple we need a FileSystem compatible with macOS < 10.15 or GCC < version 9
 #--------------------------------------------------------------------------------------------------
