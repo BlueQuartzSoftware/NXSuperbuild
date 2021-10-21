@@ -8,7 +8,7 @@ endif()
 
 cmake_minimum_required(VERSION 3.16.0)
 
-project(DREAM3DSuperBuild VERSION 2.0.0.0 LANGUAGES C CXX)
+project(NXSuperBuild VERSION 2.0.0.0 LANGUAGES C CXX)
 
 # This allows us to just use the "include()" command and the name of the project
 set(CMAKE_MODULE_PATH 
@@ -47,8 +47,8 @@ message(STATUS "NX_SDK_FILE:   ${NX_SDK_FILE}")
 #------------------------------------------------------------------------------
 # Set the custom download location for all of the sources
 # -----------------------------------------------------------------------------
-option(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE "Download Sources from a custom location" OFF)
-set(DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX "http://dream3d.bluequartz.net/binaries/SDK/" CACHE STRING "Custom HTTP(s) URL")
+option(NX_USE_CUSTOM_DOWNLOAD_SITE "Download Sources from a custom location" OFF)
+set(NX_CUSTOM_DOWNLOAD_URL_PREFIX "http://dream3d.bluequartz.net/binaries/SDK/" CACHE STRING "Custom HTTP(s) URL")
 
 set(BUILD_SHARED_LIBS ON)
 
@@ -116,7 +116,7 @@ else()
               ${NX_SDK}/NX.cmake COPYONLY )
 endif()
 
-FILE(APPEND ${NX_SDK_FILE} "set(NX_SDK_VERSION ${DREAM3DSuperBuild_VERSION})\n")
+FILE(APPEND ${NX_SDK_FILE} "set(NX_SDK_VERSION ${NXSuperBuild_VERSION})\n")
 FILE(APPEND ${NX_SDK_FILE} "\n")
 FILE(APPEND ${NX_SDK_FILE} "set(BUILD_SHARED_LIBS ON CACHE BOOL \"\")\n")
 FILE(APPEND ${NX_SDK_FILE} "set(NX_SDK_ROOT \"${NX_SDK}\")\n")

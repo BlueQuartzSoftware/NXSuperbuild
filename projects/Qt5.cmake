@@ -3,71 +3,16 @@
 #--------------------------------------------------------------------------------------------------
 OPTION(INSTALL_QT5 "Install Qt5" ON)
 
-if("${QtVersion}" STREQUAL "")
-  set(QtVersion "5.12")
-endif()
-
-if("${QtVersion}" STREQUAL "5.12")
-  set(Qt512 "1")
-  set(Qt514 "0")
-  set(Qt515 "0")
-endif()
-
-if("${QtVersion}" STREQUAL "5.14")
-  set(Qt512 "0")
-  set(Qt514 "1")
-  set(Qt515 "0")
-endif()
-
-if("${QtVersion}" STREQUAL "5.15")
-  set(Qt512 "0")
-  set(Qt514 "0")
-  set(Qt515 "1")
-endif()
-
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE AND Qt515)
-  message(FATAL_ERROR "Using a custom download site and Qt version 5.15 is not supported. Please use Qt 5.14 or 5.12 instead")
-endif()
-# ------------------------------------------------------------------------------
-# Qt 5.12.8
-# Qt 5.12 is a LTS release
-if(Qt512)
-  if(Qt514 OR Qt515)
-    message(FATAL_ERROR "Please set the -DQtVersion=(5.12 | 5.14 | 5.15)  to select the version of Qt5 that you want to build against.")
-  endif()
-  set(qt5_version_major "5.12")
-  set(qt5_version_full "5.12.8")
-  set(qt5_version_short "5.12.8")
-  # This variable is used inside the javascript file that performs the Qt installation
-  set(qt5_installer_version "qt5.5128")
-endif()
-
-# ------------------------------------------------------------------------------
-# Qt 5.14.x
-if(Qt514)
-  if(Qt512 OR Qt515)
-    message(FATAL_ERROR "Please set the -DQtVersion=(5.12 | 5.14 | 5.15)  to select the version of Qt5 that you want to build against.")
-  endif()
-  set(qt5_version_major "5.14")
-  set(qt5_version_full "5.14.2")
-  set(qt5_version_short "5.14.2")
-  # This variable is used inside the javascript file that performs the Qt installation
-  set(qt5_installer_version "qt5.5142")
-endif()
+set(QtVersion "5.15")
+set(Qt515 "1")
 
 # ------------------------------------------------------------------------------
 # Qt 5.15.x
-# Qt 5.12 is a LTS release
-if(Qt515)
-  if(Qt512 OR Qt514)
-    message(FATAL_ERROR "Please set the -DQtVersion=(5.12 | 5.14 | 5.15) to select the version of Qt5 that you want to build against.")
-  endif()
-  set(qt5_version_major "5.15")
-  set(qt5_version_full "5.15.2")
-  set(qt5_version_short "5.15.2")
-  # This variable is used inside the javascript file that performs the Qt installation
-  set(qt5_installer_version "qt5.5152")
-endif()
+set(qt5_version_major "5.15")
+set(qt5_version_full "5.15.2")
+set(qt5_version_short "5.15.2")
+# This variable is used inside the javascript file that performs the Qt installation
+set(qt5_installer_version "qt5.5152")
 
 
 set(extProjectName "Qt${qt5_version_full}")
