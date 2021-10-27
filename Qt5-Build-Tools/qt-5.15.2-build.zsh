@@ -17,11 +17,13 @@ echo "INSTALL_DIR=$INSTALL_DIR"
 umask 022
 
 CpuBrand=`sysctl -n machdep.cpu.brand_string | grep "Apple" | wc -l`
-if [ ${CpuBrand} != 0 ];
-then
+echo "CpuBrand: $CpuBrand"
+if [ "x$CpuBrand" = "x0" ]; then
   ARCH=arm64
+  INSTALL_ARCH=arm64
 else
   ARCH=x86_64
+  INSTALL_ARCH=64
 fi
 
 echo "ARCH=$ARCH"
@@ -118,7 +120,7 @@ mkdir "Qt$VERSION-$ARCH" || exit $?
 pushd "Qt$VERSION-$ARCH" > /dev/null
 ../qt5/configure \
     -opensource -confirm-license \
-    --prefix=$INSTALL_DIR/Qt$VERSION-$ARCH/$VERSION/clang_$ARCH \
+    --prefix=$INSTALL_DIR/Qt$VERSION-$ARCH/$VERSION/clang_$INSTALL_ARCH \
     --docdir=$INSTALL_DIR/Qt$VERSION-$ARCH/Docs/Qt-$VERSION \
     -feature-relocatable \
     -release \
