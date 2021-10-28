@@ -6,7 +6,7 @@ if(NOT BUILD_oneTBB)
   return()
 endif()
 
-set(extProjectName "TBB")
+set(extProjectName "oneTBB")
 set(oneTBB_GIT_TAG "v2021.4.0")
 set(oneTBB_VERSION "2021.4.0")
 message(STATUS "Building: ${extProjectName} ${oneTBB_VERSION}: -DBUILD_oneTBB=${BUILD_oneTBB}")
