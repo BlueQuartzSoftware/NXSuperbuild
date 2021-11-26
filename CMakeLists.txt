@@ -65,8 +65,6 @@ if(APPLE)
     message(FATAL_ERROR "MacOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} NOT supported. macOS Catalina is the minimum system")
   ENDIF ()
 
-
-
   IF (DARWIN_VERSION EQUAL 19) # macOS 10.15 Catalina (Xcode 11.x or Xcode 12.x)
     set(MACOS_NAME "Catalina")
     set(OSX_DEPLOYMENT_TARGET "10.15")
@@ -92,7 +90,6 @@ if(APPLE)
   if("${OSX_SDK}" STREQUAL "NOT-FOUND")
     message(FATAL_ERROR "This version of macOS (${DARWIN_VERSION}) is not recognized.\
       The following versions are supported:\n\
-      (18) macOS 10.15 Mojave\n\
       (19) macOS 10.15 Catalina\n\
       (20) macOS 11.00 Big Sur\n\
       (21) macOS 12.00 Monterey\n\
@@ -161,7 +158,7 @@ include(ghcFileSystem)
 #--------------------------------------------------------------------------------------------------
 # 
 #--------------------------------------------------------------------------------------------------
-file(APPEND ${NX_SDK_FILE} "\n\n\nif(0)\nset(COMPLEX_PLUGIN_SEARCH_DIRS ${NX_SDK}/../complex_plugins ${NX_SDK}/../complex_plugins_private)\n")
+file(APPEND ${NX_SDK_FILE} "\n\n\nif(COMPLEX_ENABLE_PLUGINS)\nset(COMPLEX_PLUGIN_SEARCH_DIRS ${NX_SDK}/../complex_plugins ${NX_SDK}/../complex_plugins_private)\n")
 
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "set(COMPLEX_EXTRA_PLUGINS\n")

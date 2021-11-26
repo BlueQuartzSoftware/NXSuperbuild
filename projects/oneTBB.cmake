@@ -61,6 +61,6 @@ ExternalProject_Add(${extProjectName}
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 file(APPEND ${NX_SDK_FILE} "# oneTBB\n")
-file(APPEND ${NX_SDK_FILE} "set(TBB_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${oneTBB_VERSION}-\${BUILD_TYPE}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(TBB_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${oneTBB_VERSION}-\${BUILD_TYPE}/lib/cmake/TBB\" CACHE PATH \"\")\n")
 file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${TBB_DIR})\n")
 file(APPEND ${NX_SDK_FILE} "set(TBB_VERSION \"${oneTBB_VERSION}\" CACHE STRING \"\")\n")
