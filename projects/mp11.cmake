@@ -13,10 +13,10 @@ message(STATUS "Building: ${extProjectName} ${boost_mp11_VERSION}: -DBUILD_MP11_
 
 set(boost_mp11_INSTALL "${NX_SDK}/${extProjectName}-${boost_mp11_VERSION}")
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
     DOWNLOAD_NAME ${extProjectName}-${boost_mp11_VERSION}.zip
-    URL ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${boost_mp11_VERSION}.zip
+    URL ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${boost_mp11_VERSION}.zip
   )
 else()
   set(EP_SOURCE_ARGS  

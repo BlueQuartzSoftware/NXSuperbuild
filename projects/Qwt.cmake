@@ -44,10 +44,10 @@ else()
 endif()
 
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
     DOWNLOAD_NAME ${extProjectName}-${qwt_VERSION}.tar.gz
-    URL ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${qwt_VERSION}.tar.gz
+    URL ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${qwt_VERSION}.tar.gz
   )
 else()
   set(EP_SOURCE_ARGS  

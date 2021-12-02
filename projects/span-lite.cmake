@@ -13,10 +13,10 @@ message(STATUS "Building: ${extProjectName} ${span-lite_VERSION}: -DBUILD_SPAN_L
 
 set(span-lite_INSTALL "${NX_SDK}/${extProjectName}-${span-lite_VERSION}")
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
     DOWNLOAD_NAME ${extProjectName}-${span-lite_VERSION}.zip
-    URL ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${span-lite_VERSION}.zip
+    URL ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${span-lite_VERSION}.zip
   )
 else()
   set(EP_SOURCE_ARGS  

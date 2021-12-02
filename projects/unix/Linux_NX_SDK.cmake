@@ -1,6 +1,6 @@
 # This is the NX_SDK File. This file contains all the paths to the dependent libraries.
 # This was generated for Version 6.3 Development of DREAM.3D. This SDK has C++11 Support ENABLED
-if(NOT DEFINED DREAM3D_FIRST_CONFIGURE)
+if(NOT DEFINED NX_FIRST_CONFIGURE)
   message(STATUS "*******************************************************")
   message(STATUS "* DREAM.3D First Configuration Run                    *")
   message(STATUS "* NX_SDK Loading from ${CMAKE_CURRENT_LIST_DIR}  *")

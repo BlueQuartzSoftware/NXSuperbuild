@@ -7,7 +7,7 @@ if(NOT BUILD_EIGEN)
 endif()
 
 set(extProjectName "Eigen")
-set(Eigen3_VERSION "3.3.9")
+set(Eigen3_VERSION "3.3.9" CACHE STRING "")
 message(STATUS "Building: ${extProjectName} ${Eigen3_VERSION}: -DBUILD_EIGEN=${BUILD_EIGEN}")
 set(Eigen_GIT_TAG ${Eigen3_VERSION})
 
@@ -24,10 +24,10 @@ configure_file(
 )
 
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
     DOWNLOAD_NAME ${extProjectName}-${Eigen3_VERSION}.tar.gz
-    URL ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${Eigen3_VERSION}.tar.gz
+    URL ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${Eigen3_VERSION}.tar.gz
   )
 else()
   set(EP_SOURCE_ARGS  

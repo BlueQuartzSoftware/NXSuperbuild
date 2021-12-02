@@ -13,10 +13,10 @@ message(STATUS "Building: ${extProjectName} ${nlohmann_json_VERSION}: -DBUILD_NL
 
 set(nlohmann_json_INSTALL "${NX_SDK}/${extProjectName}-${nlohmann_json_VERSION}")
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
     DOWNLOAD_NAME ${extProjectName}-${nlohmann_json_VERSION}.zip
-    URL ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${nlohmann_json_VERSION}.zip
+    URL ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${nlohmann_json_VERSION}.zip
   )
 else()
   set(EP_SOURCE_ARGS  

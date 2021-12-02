@@ -14,8 +14,8 @@ set(tbb_VERSION "2020.1")
 message(STATUS "Building: ${extProjectName} ${tbb_VERSION}: -DBUILD_TBB=${BUILD_TBB}" )
 
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
-  set(tbb_url_server "${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}")
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
+  set(tbb_url_server "${NX_CUSTOM_DOWNLOAD_URL_PREFIX}")
 else()
   set(tbb_url_server "https://github.com/intel/tbb/releases/download/v2020.1/")
 endif()

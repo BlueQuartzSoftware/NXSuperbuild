@@ -13,10 +13,10 @@ message(STATUS "Building: ${extProjectName} ${pybind11_VERSION}: -DBUILD_PYBIND1
 
 set(pybind11_INSTALL "${NX_SDK}/${extProjectName}-${pybind11_VERSION}")
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
     DOWNLOAD_NAME ${extProjectName}-${pybind11_VERSION}.tar.gz
-    URL ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${pybind11_VERSION}.tar.gz
+    URL ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${pybind11_VERSION}.tar.gz
   )
 else()
   set(EP_SOURCE_ARGS  

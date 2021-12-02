@@ -25,7 +25,8 @@ CMakeLists.txt.user
 
 /*-debug/
 /*-release/
-
+/debug/
+/release/
 /build/
 
 CMakeUserPresets.json

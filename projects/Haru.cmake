@@ -21,10 +21,10 @@ if(NOT APPLE AND NOT WIN32)
 endif()
 
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
     DOWNLOAD_NAME ${extProjectName}-${haru_VERSION}.zip
-    URL ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${haru_VERSION}.zip
+    URL ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${haru_VERSION}.zip
   )
 else()
   set(EP_SOURCE_ARGS  

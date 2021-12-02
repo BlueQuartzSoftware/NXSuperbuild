@@ -1,4 +1,4 @@
-if(NOT DEFINED DREAM3D_FIRST_CONFIGURE)
+if(NOT DEFINED NX_FIRST_CONFIGURE)
   message(STATUS "*******************************************************")
   message(STATUS "* DREAM.3D First Configuration Run                    *")
   message(STATUS "* NX_SDK Loading from ${CMAKE_CURRENT_LIST_DIR}  *")

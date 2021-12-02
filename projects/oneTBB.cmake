@@ -8,15 +8,15 @@ endif()
 
 set(extProjectName "oneTBB")
 set(oneTBB_GIT_TAG "v2021.4.0")
-set(oneTBB_VERSION "2021.4.0")
+set(oneTBB_VERSION "2021.4.0" CACHE STRING "")
 message(STATUS "Building: ${extProjectName} ${oneTBB_VERSION}: -DBUILD_oneTBB=${BUILD_oneTBB}")
 
 set(oneTBB_INSTALL "${NX_SDK}/${extProjectName}-${oneTBB_VERSION}-${CMAKE_BUILD_TYPE}")
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
     DOWNLOAD_NAME ${extProjectName}-${oneTBB_VERSION}.zip
-    URL ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${oneTBB_VERSION}.zip
+    URL ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${oneTBB_VERSION}.zip
   )
 else()
   set(EP_SOURCE_ARGS  

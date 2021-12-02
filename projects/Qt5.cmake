@@ -90,8 +90,8 @@ configure_file(
   @ONLY
 )
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
-  set(qt5_url ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}/qt)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
+  set(qt5_url ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}/qt)
 else()
   set(qt5_url http://qt.mirror.constant.com/archive/qt)
 endif()

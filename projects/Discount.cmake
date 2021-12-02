@@ -16,10 +16,10 @@ else()
   set(discount_INSTALL "${NX_SDK}/${extProjectName}-${discount_VERSION}-${CMAKE_BUILD_TYPE}")
 endif()
 
-if(DREAM3D_USE_CUSTOM_DOWNLOAD_SITE)
+if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
     DOWNLOAD_NAME ${extProjectName}-${discount_VERSION}.tar.gz
-    URL ${DREAM3D_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${discount_VERSION}.tar.gz
+    URL ${NX_CUSTOM_DOWNLOAD_URL_PREFIX}${extProjectName}-${discount_VERSION}.tar.gz
   )
 else()
   set(EP_SOURCE_ARGS  
