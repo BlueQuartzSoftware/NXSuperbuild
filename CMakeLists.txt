@@ -165,7 +165,7 @@ include(EbsdLib)
 #--------------------------------------------------------------------------------------------------
 # 
 #--------------------------------------------------------------------------------------------------
-file(APPEND ${NX_SDK_FILE} "\n\n\nif(COMPLEX_ENABLE_PLUGINS)\nset(COMPLEX_PLUGIN_SEARCH_DIRS ${NX_SDK}/../complex_plugins ${NX_SDK}/../complex_plugins_private)\n")
+file(APPEND ${NX_SDK_FILE} "\n\n\nif(COMPLEX_ENABLE_PLUGINS)\n  set(COMPLEX_PLUGIN_SEARCH_DIRS\n    ${NX_SDK}/../complex_plugins\n    {NX_SDK}/../complex_plugins_private)\n")
 
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "set(COMPLEX_EXTRA_PLUGINS\n")
