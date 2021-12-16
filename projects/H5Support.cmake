@@ -55,7 +55,6 @@ ExternalProject_Add(${extProjectName}
     -DH5Support_INCLUDE_QT_API=OFF
     -DHDF5_DIR=${HDF5_CMAKE_MODULE_DIR}
 
-
   DEPENDS hdf5
   LOG_DOWNLOAD 1
   LOG_UPDATE 1

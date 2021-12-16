@@ -85,6 +85,7 @@ ExternalProject_Add(${extProjectName}
   LOG_INSTALL 1
 )
 
+set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/share/hdf5" CACHE PATH "" FORCE)
 
 #-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building

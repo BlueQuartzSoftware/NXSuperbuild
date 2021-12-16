@@ -59,6 +59,9 @@ ExternalProject_Add(${extProjectName}
   LOG_INSTALL 1
 )
 
+set(fmt_CMAKE_MODULE_DIR "${fmt_INSTALL}/share/${extProjectName}" CACHE PATH "" FORCE)
+
+
 #-- Append this information to the NX_SDK CMake file that helps other developers
 #-- configure DREAM3D for building
 file(APPEND ${NX_SDK_FILE} "\n")
