@@ -7,8 +7,8 @@ if(NOT BUILD_H5Support)
 endif()
 
 set(extProjectName "H5Support")
-set(H5Support_GIT_TAG "v1.0.1")
-set(H5Support_VERSION "1.0.1" CACHE STRING "")
+set(H5Support_GIT_TAG "v1.0.2")
+set(H5Support_VERSION "1.0.2" CACHE STRING "")
 message(STATUS "Building: ${extProjectName} ${H5Support_VERSION}: -DBUILD_H5Support=${BUILD_H5Support}")
 
 set(H5Support_INSTALL "${NX_SDK}/${extProjectName}-${H5Support_VERSION}")
@@ -26,6 +26,11 @@ else()
   )
 endif()
 
+if(WIN32)
+  set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/cmake/hdf5")
+else()
+  set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/share/hdf5")
+endif()
 
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
@@ -48,6 +53,7 @@ ExternalProject_Add(${extProjectName}
     -DCMAKE_CXX_STANDARD_REQUIRED=ON
     -DBUILD_TESTING=OFF
     -DH5Support_INCLUDE_QT_API=OFF
+    -DHDF5_DIR=${HDF5_CMAKE_MODULE_DIR}
 
 
   DEPENDS hdf5
