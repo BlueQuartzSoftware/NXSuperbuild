@@ -64,6 +64,7 @@ ExternalProject_Add(${extProjectName}
     -DH5Support_DIR:PATH=${NX_SDK}/H5Support-${H5Support_VERSION}/share/cmake/H5Support
     -DTBB_DIR:PATH=${NX_SDK}/oneTBB-${oneTBB_VERSION}-${CMAKE_BUILD_TYPE}/lib/cmake/TBB
     -DEigen3_DIR:PATH=${NX_SDK}/Eigen-${Eigen3_VERSION}/share/eigen3/cmake
+    -DHDF5_DIR:PATH=${NX_SDK}/hdf5-${HDF5_VERSION}-${CMAKE_BUILD_TYPE}/share/hdf5
 
   DEPENDS hdf5 H5Support Eigen oneTBB
 
