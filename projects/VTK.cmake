@@ -16,7 +16,7 @@ message(STATUS "Building: ${extProjectName} ${VTK_VERSION}: -DBUILD_VTK=${BUILD_
 set(SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${VTK_VERSION}/Source/${extProjectName}")
 set(BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}/Build-${CMAKE_BUILD_TYPE}")
 
-if(WIN32)
+if(CMAKE_GENERATOR MATCHES "Visual Studio")
   set(VTK_INSTALL "${NX_SDK}/${extProjectName}-${VTK_VERSION}")
 else()
   set(VTK_INSTALL "${NX_SDK}/${extProjectName}-${VTK_VERSION}-${CMAKE_BUILD_TYPE}")

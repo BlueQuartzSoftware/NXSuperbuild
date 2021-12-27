@@ -11,7 +11,11 @@ set(oneTBB_GIT_TAG "v2021.4.0")
 set(oneTBB_VERSION "2021.4.0" CACHE STRING "")
 message(STATUS "Building: ${extProjectName} ${oneTBB_VERSION}: -DBUILD_oneTBB=${BUILD_oneTBB}")
 
-set(oneTBB_INSTALL "${NX_SDK}/${extProjectName}-${oneTBB_VERSION}-${CMAKE_BUILD_TYPE}")
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
+  set(oneTBB_INSTALL "${NX_SDK}/${extProjectName}-${oneTBB_VERSION}")
+else()
+  set(oneTBB_INSTALL "${NX_SDK}/${extProjectName}-${oneTBB_VERSION}-${CMAKE_BUILD_TYPE}")
+endif()
 
 if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  

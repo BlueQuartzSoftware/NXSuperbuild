@@ -10,8 +10,11 @@ set(extProjectName "fmt")
 set(fmt_GIT_TAG "7.1.3")
 set(fmt_VERSION "7.1.3")
 message(STATUS "Building: ${extProjectName} ${fmt_VERSION}: -DBUILD_FMT=${BUILD_FMT}")
-
-set(fmt_INSTALL "${NX_SDK}/${extProjectName}-${fmt_VERSION}-${CMAKE_BUILD_TYPE}")
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
+  set(fmt_INSTALL "${NX_SDK}/${extProjectName}-${fmt_VERSION}")
+else()
+  set(fmt_INSTALL "${NX_SDK}/${extProjectName}-${fmt_VERSION}-${CMAKE_BUILD_TYPE}")
+endif()
 
 if(NX_USE_CUSTOM_DOWNLOAD_SITE)
   set(EP_SOURCE_ARGS  
