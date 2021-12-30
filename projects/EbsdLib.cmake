@@ -7,8 +7,8 @@ if("${BUILD_EBSDLIB}" STREQUAL "OFF")
 endif()
 
 set(extProjectName "EbsdLib")
-set(EbsdLib_VERSION "1.0.6")
-set(EbsdLib_GIT_TAG "v1.0.6")
+set(EbsdLib_VERSION "1.0.7")
+set(EbsdLib_GIT_TAG "v1.0.7")
 message(STATUS "Building: ${extProjectName} ${EbsdLib_VERSION}: -DBUILD_EBSDLIB=${BUILD_EBSDLIB}" )
 
 if (CMAKE_GENERATOR MATCHES "Visual Studio")
