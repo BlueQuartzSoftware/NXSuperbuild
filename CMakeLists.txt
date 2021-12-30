@@ -8,11 +8,6 @@ endif()
 
 cmake_minimum_required(VERSION 3.16.0)
 
-# if (CMAKE_GENERATOR MATCHES "Visual Studio")
-#     message(FATAL_ERROR "Using Visual Studio to build the SDK is not supported as Debug/Release will get mixed together and cause problems. Suggest to use VCPKG instead")
-# else()
-#     message(STATUS "CMAKE_GENERATOR: ${CMAKE_GENERATOR}")
-# endif()
 
 project(NXSuperBuild VERSION 2.0.0.0 LANGUAGES C CXX)
 

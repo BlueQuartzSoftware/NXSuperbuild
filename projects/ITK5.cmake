@@ -11,9 +11,9 @@ set(ITK_GIT_TAG "v5.2.1")
 set(ITK_VERSION "5.2.1")
 
 message(STATUS "Building: ${extProjectName} ${ITK_VERSION}: -DBUILD_ITK=${BUILD_ITK}" )
+message(STATUS "  ITK ${ITK_VERSION} USING: HDF5 at ${HDF5_CMAKE_MODULE_DIR}")
 
 option(ITK_SCIFIO_SUPPORT "Add support for SCIFIO to the ITK build" OFF)
-set(SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${ITK_VERSION}/Source/${extProjectName}")
 set(ITK_INSTALL_DIR "${NX_SDK}/superbuild/${extProjectName}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
 set(BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}/Build-${CMAKE_BUILD_TYPE}")
 
@@ -22,11 +22,9 @@ set(BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}/Build-${CMAKE_BUILD_TYPE}
 # dependent on the version of HDF5 that is being used.
 
 if(WIN32)
-  set(SOURCE_DIR "${NX_SDK}/${extProjectName}-src")
   set(BINARY_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}")
   set(ITK_INSTALL_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}")
   set(CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MP")
-  set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/cmake/hdf5")
 elseif(APPLE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "${OSX_DEPLOYMENT_TARGET}")
   set(CMAKE_OSX_SYSROOT "${OSX_SDK}")
@@ -35,12 +33,10 @@ elseif(APPLE)
   set(BINARY_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
   set(ITK_INSTALL_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
   set(CXX_FLAGS "-stdlib=libc++ -std=c++14")
-  set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/share/hdf5")
 elseif("${BUILD_ITK}" STREQUAL "ON")
   set(BINARY_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
   set(ITK_INSTALL_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}-${CMAKE_BUILD_TYPE}")
   set(CXX_FLAGS "-std=c++14")
-  set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/share/hdf5")
 else()
   if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CXX_FLAGS "-stdlib=libc++ -std=c++14")
@@ -74,6 +70,8 @@ else()
   )
 endif()
 
+
+
 #------------------------------------------------------------------------------
 # In the below we are using ITK 5.1.1 from the 5.1.1 tag.
 ExternalProject_Add(${extProjectName}
@@ -82,7 +80,7 @@ ExternalProject_Add(${extProjectName}
   TMP_DIR "${D3DSP_BASE_DIR}/tmp/${CMAKE_BUILD_TYPE}"
   STAMP_DIR "${D3DSP_BASE_DIR}/Stamp/${CMAKE_BUILD_TYPE}"
   DOWNLOAD_DIR ${D3DSP_BASE_DIR}
-  SOURCE_DIR "${SOURCE_DIR}"
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${ITK_VERSION}/Source/${extProjectName}"
   BINARY_DIR "${BINARY_DIR}"
   INSTALL_DIR "${D3DSP_BASE_DIR}/Install"
   INSTALL_COMMAND ""
@@ -144,8 +142,8 @@ ExternalProject_Add(${extProjectName}
 
     -DEigen3_DIR:PATH=${Eigen3_DIR}
   
-  DEPENDS hdf5
-  DEPENDS Eigen
+  # DEPENDS hdf5
+  # DEPENDS Eigen
   LOG_DOWNLOAD 1
   LOG_UPDATE 1
   LOG_CONFIGURE 1
@@ -160,7 +158,7 @@ ExternalProject_Add(${extProjectName}
 FILE(APPEND ${NX_SDK_FILE} "\n")
 FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 FILE(APPEND ${NX_SDK_FILE} "# ITK Library Location\n")
-if(WIN32)
+if(CMAKE_GENERATOR MATCHES "Visual Studio")
   FILE(APPEND ${NX_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-${ITK_VERSION}\" CACHE PATH \"\")\n")
 else()
   FILE(APPEND ${NX_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-${ITK_VERSION}-\${BUILD_TYPE}\" CACHE PATH \"\")\n")

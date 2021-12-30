@@ -133,7 +133,7 @@ ExternalProject_Add(${extProjectName}
 FILE(APPEND ${NX_SDK_FILE} "\n")
 FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 FILE(APPEND ${NX_SDK_FILE} "# VTK Library Location\n")
-if(WIN32)
+if(CMAKE_GENERATOR MATCHES "Visual Studio")
   FILE(APPEND ${NX_SDK_FILE} "set(VTK_DIR \"\${NX_SDK_ROOT}/VTK-${VTK_VERSION}\" CACHE PATH \"\")\n")
 else()
   FILE(APPEND ${NX_SDK_FILE} "set(VTK_DIR \"\${NX_SDK_ROOT}/VTK-${VTK_VERSION}-\${BUILD_TYPE}/lib/cmake/vtk-${VTK_VERSION_SHORT}\" CACHE PATH \"\")\n")

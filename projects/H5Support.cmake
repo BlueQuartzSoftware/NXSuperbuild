@@ -7,8 +7,8 @@ if(NOT BUILD_H5Support)
 endif()
 
 set(extProjectName "H5Support")
-set(H5Support_GIT_TAG "v1.0.2")
-set(H5Support_VERSION "1.0.2" CACHE STRING "")
+set(H5Support_GIT_TAG "v1.0.4")
+set(H5Support_VERSION "1.0.4" CACHE STRING "")
 message(STATUS "Building: ${extProjectName} ${H5Support_VERSION}: -DBUILD_H5Support=${BUILD_H5Support}")
 
 set(H5Support_INSTALL "${NX_SDK}/${extProjectName}-${H5Support_VERSION}")
@@ -69,6 +69,6 @@ ExternalProject_Add(${extProjectName}
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 file(APPEND ${NX_SDK_FILE} "# H5Support\n")
-file(APPEND ${NX_SDK_FILE} "set(H5Support_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${H5Support_VERSION}/share/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(H5Support_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${H5Support_VERSION}/share/${extProjectName}\" CACHE PATH \"\")\n")
 file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${H5Support_DIR})\n")
 file(APPEND ${NX_SDK_FILE} "set(H5Support_VERSION \"${H5Support_VERSION}\" CACHE STRING \"\")\n")
