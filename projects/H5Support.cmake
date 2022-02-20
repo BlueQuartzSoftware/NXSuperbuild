@@ -8,7 +8,7 @@ endif()
 
 set(extProjectName "H5Support")
 set(H5Support_GIT_TAG "v1.0.5")
-set(H5Support_VERSION "1.0.5" CACHE STRING "")
+set(H5Support_VERSION "1.0.5")
 message(STATUS "Building: ${extProjectName} ${H5Support_VERSION}: -DBUILD_H5Support=${BUILD_H5Support}")
 
 set(H5Support_INSTALL "${NX_SDK}/${extProjectName}-${H5Support_VERSION}")
@@ -55,7 +55,7 @@ ExternalProject_Add(${extProjectName}
     -DH5Support_INCLUDE_QT_API=OFF
     -DHDF5_DIR=${HDF5_CMAKE_MODULE_DIR}
 
-  DEPENDS hdf5
+ # DEPENDS hdf5
   LOG_DOWNLOAD 1
   LOG_UPDATE 1
   LOG_CONFIGURE 1
