@@ -7,8 +7,8 @@ if(NOT BUILD_oneTBB)
 endif()
 
 set(extProjectName "oneTBB")
-set(oneTBB_GIT_TAG "v2021.4.0")
-set(oneTBB_VERSION "2021.4.0" CACHE STRING "")
+set(oneTBB_GIT_TAG "v2021.5.0")
+set(oneTBB_VERSION "2021.5.0" CACHE STRING "")
 message(STATUS "Building: ${extProjectName} ${oneTBB_VERSION}: -DBUILD_oneTBB=${BUILD_oneTBB}")
 
 if (CMAKE_GENERATOR MATCHES "Visual Studio")
@@ -30,6 +30,15 @@ else()
   )
 endif()
 
+IF (DARWIN_VERSION GREATER 19)
+get_filename_component(_self_dir ${CMAKE_CURRENT_LIST_FILE} PATH)
+
+configure_file(
+  "${_self_dir}/patches/oneTBB/AppleClang.cmake"
+  "${NX_SDK}/superbuild/${extProjectName}-${oneTBB_VERSION}/Source/cmake/compilers/AppleClang.cmake"
+  @ONLY
+)
+endif()
 
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
