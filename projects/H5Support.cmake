@@ -26,11 +26,7 @@ else()
   )
 endif()
 
-if(WIN32)
-  set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/cmake/hdf5")
-else()
-  set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/share/hdf5")
-endif()
+set(HDF5_CMAKE_MODULE_DIR "${HDF5_INSTALL}/share/hdf5")
 
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
@@ -54,6 +50,8 @@ ExternalProject_Add(${extProjectName}
     -DBUILD_TESTING=OFF
     -DH5Support_INCLUDE_QT_API=OFF
     -DHDF5_DIR=${HDF5_CMAKE_MODULE_DIR}
+    -DCMP_HDF5_ENABLE_INSTALL=OFF
+    -DCMP_HDF5_ENABLE_COPY=OFF
 
  # DEPENDS hdf5
   LOG_DOWNLOAD 1
