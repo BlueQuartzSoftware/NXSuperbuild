@@ -21,7 +21,7 @@ set(BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}/Build-${CMAKE_BUILD_TYPE}
 # The next section about setting the HDF5_CMAKE_MODULE_DIR directory is VERY 
 # dependent on the version of HDF5 that is being used.
 
-if(WIN32)
+if(CMAKE_GENERATOR MATCHES "Visual Studio")
   set(BINARY_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}")
   set(ITK_INSTALL_DIR "${NX_SDK}/${extProjectName}-${ITK_VERSION}")
   set(CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MP")
@@ -105,7 +105,7 @@ ExternalProject_Add(${extProjectName}
     -DBUILD_DOCUMENTATION:BOOL=OFF
     -DBUILD_EXAMPLES:BOOL=OFF
     -DBUILD_TESTING:BOOL=OFF
-   
+    -DITK_SKIP_PATH_LENGTH_CHECKS:BOOL=OFF
     -DKWSYS_USE_MD5:BOOL=ON
     
     -DITK_LEGACY_REMOVE:BOOL=OFF
