@@ -7,8 +7,8 @@ if("${BUILD_EBSDLIB}" STREQUAL "OFF")
 endif()
 
 set(extProjectName "EbsdLib")
-set(EbsdLib_VERSION "1.0.9")
-set(EbsdLib_GIT_TAG "v1.0.9")
+set(EbsdLib_VERSION "1.0.11")
+set(EbsdLib_GIT_TAG "v1.0.11")
 message(STATUS "Building: ${extProjectName} ${EbsdLib_VERSION}: -DBUILD_EBSDLIB=${BUILD_EBSDLIB}" )
 
 if (CMAKE_GENERATOR MATCHES "Visual Studio")
@@ -61,6 +61,7 @@ ExternalProject_Add(${extProjectName}
     -DEbsdLib_BUILD_TOOLS=OFF
     -DEbsdLib_ENABLE_TESTING=OFF
     -DEbsdLib_BUILD_H5SUPPORT=OFF
+    -DDREAM3D_ANACONDA=ON
     -DH5Support_DIR:PATH=${NX_SDK}/H5Support-${H5Support_VERSION}/share/H5Support
     -DTBB_DIR:PATH=${NX_SDK}/oneTBB-${oneTBB_VERSION}-${CMAKE_BUILD_TYPE}/lib/cmake/TBB
     -DEigen3_DIR:PATH=${NX_SDK}/Eigen-${Eigen3_VERSION}/share/eigen3/cmake
