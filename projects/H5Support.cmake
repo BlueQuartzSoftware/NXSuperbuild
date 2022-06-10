@@ -7,8 +7,8 @@ if(NOT BUILD_H5Support)
 endif()
 
 set(extProjectName "H5Support")
-set(H5Support_GIT_TAG "v1.0.6")
-set(H5Support_VERSION "1.0.6")
+set(H5Support_GIT_TAG "v1.0.8")
+set(H5Support_VERSION "1.0.8")
 message(STATUS "Building: ${extProjectName} ${H5Support_VERSION}: -DBUILD_H5Support=${BUILD_H5Support}")
 
 set(H5Support_INSTALL "${NX_SDK}/${extProjectName}-${H5Support_VERSION}")
