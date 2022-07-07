@@ -8,6 +8,11 @@ endif()
 
 cmake_minimum_required(VERSION 3.16.0)
 
+if(CMAKE_GENERATOR MATCHES "Ninja")
+  message(FATAL_ERROR "Using the Ninja Generator with the superbuild may cause problems when building due to\
+  issues with HDF5 and dependencies. 'Unix Makefiles' is highly recommended for a smooth install.\
+  This will NOT effect the generator that you use to build YOUR projects.")
+endif()
 
 project(NXSuperBuild VERSION 2.0.0.0 LANGUAGES C CXX)
 
