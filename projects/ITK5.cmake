@@ -139,7 +139,7 @@ ExternalProject_Add(${extProjectName}
 
   -DEigen3_DIR:PATH=${Eigen3_DIR}
 
-  DEPENDS hdf5
+  #DEPENDS hdf5
   DEPENDS Eigen
   LOG_DOWNLOAD 1
   LOG_UPDATE 1

@@ -13,8 +13,12 @@ message(STATUS "Building: ${extProjectName} ${EbsdLib_VERSION}: -DBUILD_EBSDLIB=
 
 if (CMAKE_GENERATOR MATCHES "Visual Studio")
   set(EbsdLib_INSTALL "${NX_SDK}/${extProjectName}-${EbsdLib_VERSION}")
+  set(HDF5_DIR "${NX_SDK}/hdf5-${HDF5_VERSION}/share/hdf5")
+  set(TBB_DIR "${NX_SDK}/oneTBB-${oneTBB_VERSION}/lib/cmake/TBB")
 else()
   set(EbsdLib_INSTALL "${NX_SDK}/${extProjectName}-${EbsdLib_VERSION}-${CMAKE_BUILD_TYPE}")
+  set(HDF5_DIR "${NX_SDK}/hdf5-${HDF5_VERSION}-${CMAKE_BUILD_TYPE}/share/hdf5")
+  set(TBB_DIR "${NX_SDK}/oneTBB-${oneTBB_VERSION}-${CMAKE_BUILD_TYPE}/lib/cmake/TBB")
 endif()
 
 if(NOT APPLE AND NOT WIN32)
@@ -63,9 +67,10 @@ ExternalProject_Add(${extProjectName}
     -DEbsdLib_BUILD_H5SUPPORT=OFF
     -DDREAM3D_ANACONDA=ON
     -DH5Support_DIR:PATH=${NX_SDK}/H5Support-${H5Support_VERSION}/share/H5Support
-    -DTBB_DIR:PATH=${NX_SDK}/oneTBB-${oneTBB_VERSION}-${CMAKE_BUILD_TYPE}/lib/cmake/TBB
+    -DTBB_DIR:PATH=${TBB_DIR}
     -DEigen3_DIR:PATH=${NX_SDK}/Eigen-${Eigen3_VERSION}/share/eigen3/cmake
-    -DHDF5_DIR:PATH=${NX_SDK}/hdf5-${HDF5_VERSION}-${CMAKE_BUILD_TYPE}/share/hdf5
+    -DHDF5_DIR:PATH=${HDF5_DIR}
+    -DCMP_TBB_ENABLE_COPY_INSTALL:BOOL=OFF
 
   DEPENDS 
      #hdf5
