@@ -33,13 +33,23 @@ ExternalProject_Add(${extProjectName}
   TMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${nod_VERSION}/tmp/${CMAKE_BUILD_TYPE}"
   STAMP_DIR "${NX_SDK}/superbuild/${extProjectName}-${nod_VERSION}/Stamp"
   DOWNLOAD_DIR ${NX_SDK}/superbuild/${extProjectName}-${nod_VERSION}/Download
-  SOURCE_DIR "${nod_INSTALL}"
+  SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${nod_VERSION}/Source"
   BINARY_DIR "${NX_SDK}/superbuild/${extProjectName}-${nod_VERSION}/Build/${CMAKE_BUILD_TYPE}"
   INSTALL_DIR "${nod_INSTALL}"
 
-  CONFIGURE_COMMAND ""
-  BUILD_COMMAND ""
-  INSTALL_COMMAND ""
+  PATCH_COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_self_dir}/patches/nod/CMakeLists.txt" "<SOURCE_DIR>/CMakeLists.txt"
+
+  CMAKE_ARGS
+    -DCMAKE_C_COMPILER:FILEPATH=${CMAKE_C_COMPILER}
+    -DCMAKE_CXX_COMPILER:FILEPATH=${CMAKE_CXX_COMPILER}
+    -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
+    -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+
+    -DCMAKE_OSX_DEPLOYMENT_TARGET=${OSX_DEPLOYMENT_TARGET}
+    -DCMAKE_OSX_SYSROOT=${OSX_SDK}
+    -DCMAKE_CXX_STANDARD_REQUIRED=ON
+    -Wno-dev
+
 
   LOG_DOWNLOAD 1
   LOG_UPDATE 1
