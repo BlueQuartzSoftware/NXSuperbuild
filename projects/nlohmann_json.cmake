@@ -7,8 +7,8 @@ if(NOT BUILD_NLOHMANN_JSON)
 endif()
 
 set(extProjectName "nlohmann_json")
-set(nlohmann_json_GIT_TAG "v3.9.1")
-set(nlohmann_json_VERSION "3.9.1")
+set(nlohmann_json_GIT_TAG "v3.11.2")
+set(nlohmann_json_VERSION "3.11.2")
 message(STATUS "Building: ${extProjectName} ${nlohmann_json_VERSION}: -DBUILD_NLOHMANN_JSON=${BUILD_NLOHMANN_JSON}")
 
 set(nlohmann_json_INSTALL "${NX_SDK}/${extProjectName}-${nlohmann_json_VERSION}")
