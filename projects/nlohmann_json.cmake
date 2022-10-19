@@ -63,6 +63,7 @@ ExternalProject_Add(${extProjectName}
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 file(APPEND ${NX_SDK_FILE} "# nlohmann_json\n")
-file(APPEND ${NX_SDK_FILE} "set(nlohmann_json_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${nlohmann_json_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
-file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${nlohmann_json_DIR})\n")
 file(APPEND ${NX_SDK_FILE} "set(nlohmann_json_VERSION \"${nlohmann_json_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(nlohmann_json_DIR \"\${NX_SDK_ROOT}/${extProjectName}-\${nlohmann_json_VERSION}/share/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${nlohmann_json_DIR})\n")
+

@@ -154,13 +154,12 @@ ExternalProject_Add(${extProjectName}
 FILE(APPEND ${NX_SDK_FILE} "\n")
 FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 FILE(APPEND ${NX_SDK_FILE} "# ITK Library Location\n")
-
+FILE(APPEND ${NX_SDK_FILE} "set(ITK_VERSION \"${ITK_VERSION}\" CACHE STRING \"\")\n")
 if(CMAKE_GENERATOR MATCHES "Visual Studio")
-  FILE(APPEND ${NX_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-${ITK_VERSION}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-\${ITK_VERSION}\" CACHE PATH \"\")\n")
 else()
-  FILE(APPEND ${NX_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-${ITK_VERSION}-\${BUILD_TYPE}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(ITK_DIR \"\${NX_SDK_ROOT}/ITK-\${ITK_VERSION}-\${BUILD_TYPE}\" CACHE PATH \"\")\n")
 endif()
 
 FILE(APPEND ${NX_SDK_FILE} "set(COMPLEX_USE_ITK \"ON\")\n")
 FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${ITK_DIR})\n")
-FILE(APPEND ${NX_SDK_FILE} "set(ITK_VERSION \"${ITK_VERSION}\" CACHE STRING \"\")\n")
