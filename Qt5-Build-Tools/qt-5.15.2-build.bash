@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+echo $SCRIPT_DIR;
+
 umask 022
 
 #------------------------------------------------------------------------------
@@ -22,7 +25,6 @@ then
   ARCH=arm64
   export QMAKE_MACOSX_DEPLOYMENT_TARGET=11.0
   export LLVM_INSTALL=/opt/local/clang+llvm-15.0.4-arm64-apple-darwin21.0
-
 else
   ARCH=x86_64
   export QMAKE_MACOSX_DEPLOYMENT_TARGET=10.15
@@ -34,6 +36,8 @@ export PATH=$PATH:$LLVM_INSTALL
 # set -e
 # set -x
 
+export NX_SDK_DIR=/Users/Shared/NX_SDK
+
 #------------------------------------------------------------------------------
 # Set the version of Qt5 that we are going to build
 #------------------------------------------------------------------------------
@@ -42,7 +46,9 @@ VERSION=5.15.7
 #------------------------------------------------------------------------------
 # Where are we building Qt5
 #------------------------------------------------------------------------------
-DEV_ROOT=/Users/Shared/OpenSource
+
+DEV_ROOT=$NX_SDK_DIR/superbuild/Qt-$VERSION
+mkdir -p $DEV_ROOT
 cd $DEV_ROOT
 
 #------------------------------------------------------------------------------
@@ -65,7 +71,7 @@ BUILD_TYPE=release
 #------------------------------------------------------------------------------
 # Set the INSTALL_ROOT and create the subdirectories
 #------------------------------------------------------------------------------
-INSTALL_ROOT=/Users/Shared/NX_SDK/Qt
+INSTALL_ROOT=$NX_SDK_DIR/Qt
 INSTALL_PREFIX=$INSTALL_ROOT/$VERSION/clang_$ARCH
 DOC_INSTALL_PREFIX=$INSTALL_ROOT/Docs/Qt-$VERSION
 EXAMPLE_INSTALL_PREFIX=$INSTALL_ROOT/Examples/Qt-$VERSION
@@ -81,8 +87,8 @@ pushd $Qt5_SOURCE_DIR/qtbase > /dev/null
 git reset --hard
 case $ARCH in
   arm64)
-    patch -p1 < "$DEV_ROOT/qtbase_qiosurfacegraphicsbuffer.patch" || exit $?
-    patch -p1 < "$DEV_ROOT/qtbase-apple-silicon.patch" || exit $?
+    patch -p1 < "$SCRIPT_DIR/qtbase_qiosurfacegraphicsbuffer.patch" || exit $?
+    patch -p1 < "$SCRIPT_DIR/qtbase-apple-silicon.patch" || exit $?
     ;;
 esac
 popd > /dev/null
@@ -91,7 +97,7 @@ pushd $Qt5_SOURCE_DIR/qt3d > /dev/null
 git reset --hard
 case $ARCH in
   arm64)
-    patch -p1 < "$DEV_ROOT/qt3d_miniz.patch" || exit $?
+    patch -p1 < "$SCRIPT_DIR/qt3d_miniz.patch" || exit $?
     ;;
 esac
 popd > /dev/null
@@ -99,6 +105,7 @@ popd > /dev/null
 #------------------------------------------------------------------------------
 # REMOVE ANY EXISTING BUILD !!!!!!
 #------------------------------------------------------------------------------
+cd $DEV_ROOT
 export Qt5_BUILD_DIR=qt-$VERSION-$ARCH-$BUILD_TYPE
 rm -rf $Qt5_BUILD_DIR
 mkdir $Qt5_BUILD_DIR
