@@ -70,11 +70,13 @@ execute_process(
   OUTPUT_VARIABLE QT_INSTALL_LIBS
   OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_STRIP_TRAILING_WHITESPACE
 )
-message(STATUS "  VTK ${VTK_VERSION} USING: Qt ${qt5_version_full}: -DQt5_QMAKE_EXECUTABLE=${Qt5_QMAKE_EXECUTABLE}" )
-set(Qt5_DIR "${QT_INSTALL_LIBS}/cmake/Qt5" CACHE PATH "")
+message(STATUS "  Qt Version: ${qt5_version_full}:")
+message(STATUS "  Qt5_QMAKE_EXECUTABLE: ${Qt5_QMAKE_EXECUTABLE}")
+message(STATUS "  Qt5_DIR:              ${QT_INSTALL_LIBS}/cmake/Qt5")
 
 #------------------------------------------------------------------------------
-# In the below we are using 
+# 
+#------------------------------------------------------------------------------
 ExternalProject_Add(${extProjectName}
   ${EP_SOURCE_ARGS}
 
@@ -102,7 +104,8 @@ ExternalProject_Add(${extProjectName}
     -DCMAKE_CXX_STANDARD_REQUIRED:BOOL=ON
     -DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}
     
-    -DQt5_DIR=${Qt5_DIR}
+    -DQt5_DIR=${QT_INSTALL_LIBS}/cmake/Qt5
+    -DVTK_QT_VERSION=5
     -DVTK_GROUP_ENABLE_Qt=YES
     -DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES
     -DVTK_MODULE_ENABLE_VTK_GUISupportQtSQL=NO

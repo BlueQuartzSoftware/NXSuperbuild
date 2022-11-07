@@ -8,14 +8,14 @@ if(NOT USE_PYTHON)
   return()
 endif()
 
-set(PYTHON_REQ_VERSION 3.6)
+set(PYTHON_REQ_VERSION 3.10)
 message(STATUS "Using: Python ${PYTHON_REQ_VERSION}: -DUSE_PYTHON=${USE_PYTHON}" )
 
-find_package(Python ${PYTHON_REQ_VERSION} COMPONENTS Interpreter)
+find_package(Python3 ${PYTHON_REQ_VERSION} COMPONENTS Interpreter)
 
-if(Python_Interpreter_FOUND)
-  message(STATUS "Found: Python ${Python_VERSION}: \"${Python_EXECUTABLE}\"")
-  execute_process(COMMAND ${Python_EXECUTABLE} "-m" "mkdocs" "--version"
+if(Python3_Interpreter_FOUND)
+  message(STATUS "Found: Python ${Python_VERSION}: \"${Python3_EXECUTABLE}\"")
+  execute_process(COMMAND ${Python3_EXECUTABLE} "-m" "mkdocs" "--version"
     RESULT_VARIABLE _mkdocs_version_result
     OUTPUT_VARIABLE _mkdocs_version_output
     OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -31,7 +31,7 @@ if(Python_Interpreter_FOUND)
     VERSION_VAR MKDOCS_VERSION
   )
 
-  set(MKDOCS_COMMAND ${Python_EXECUTABLE} "-m" "mkdocs")
+  set(MKDOCS_COMMAND ${Python3_EXECUTABLE} "-m" "mkdocs")
 else()
   message(STATUS "Python not found")
 endif()
@@ -55,8 +55,8 @@ file(APPEND ${NX_SDK_FILE} "# use the 'discount' library to generate the help fi
 if(Python_Interpreter_FOUND AND MKDOCS_FOUND)
   file(APPEND ${NX_SDK_FILE} "# A suitable Python and mkdocs were found.\n")
   file(APPEND ${NX_SDK_FILE} "if(NOT DEFINED NX_FIRST_CONFIGURE)\n")
-  file(APPEND ${NX_SDK_FILE} "  set(PYTHON_EXECUTABLE \"${Python_EXECUTABLE}\" CACHE FILEPATH \"\")\n")
-  file(APPEND ${NX_SDK_FILE} "  set(MKDOCS_PYTHON_EXECUTABLE \"${Python_EXECUTABLE}\" CACHE FILEPATH \"\")\n")
+  file(APPEND ${NX_SDK_FILE} "  set(Python3_EXECUTABLE \"${Python3_EXECUTABLE}\" CACHE FILEPATH \"\")\n")
+  file(APPEND ${NX_SDK_FILE} "  set(MKDOCS_Python3_EXECUTABLE \"${Python3_EXECUTABLE}\" CACHE FILEPATH \"\")\n")
   file(APPEND ${NX_SDK_FILE} "  set(MKDOCS_EXECUTABLE \"${MKDOCS_COMMAND}\" CACHE STRING \"\")\n")
   file(APPEND ${NX_SDK_FILE} "  # set(SIMPL_USE_DISCOUNT OFF)\n")
   file(APPEND ${NX_SDK_FILE} "  # set(SIMPL_USE_MKDOCS ON)\n")
@@ -64,8 +64,8 @@ if(Python_Interpreter_FOUND AND MKDOCS_FOUND)
 else()
   file(APPEND ${NX_SDK_FILE} "# A suitable Python and mkdocs were NOT found. Documentation will be built with discount.\n")
   file(APPEND ${NX_SDK_FILE} "if(NOT DEFINED NX_FIRST_CONFIGURE)\n")
-  file(APPEND ${NX_SDK_FILE} "  # set(PYTHON_EXECUTABLE \"${Python_EXECUTABLE}\" CACHE FILEPATH \"\")\n")
-  file(APPEND ${NX_SDK_FILE} "  # set(MKDOCS_PYTHON_EXECUTABLE \"${Python_EXECUTABLE}\" CACHE FILEPATH \"\")\n")
+  file(APPEND ${NX_SDK_FILE} "  # set(Python3_EXECUTABLE \"${Python3_EXECUTABLE}\" CACHE FILEPATH \"\")\n")
+  file(APPEND ${NX_SDK_FILE} "  # set(MKDOCS_Python3_EXECUTABLE \"${Python3_EXECUTABLE}\" CACHE FILEPATH \"\")\n")
   file(APPEND ${NX_SDK_FILE} "  # set(MKDOCS_EXECUTABLE \"${MKDOCS_COMMAND}\" CACHE STRING \"\")\n")
   file(APPEND ${NX_SDK_FILE} "  set(SIMPL_USE_DISCOUNT ON)\n")
   file(APPEND ${NX_SDK_FILE} "  set(SIMPL_USE_MKDOCS OFF)\n")
