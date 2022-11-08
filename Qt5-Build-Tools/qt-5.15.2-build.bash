@@ -23,15 +23,23 @@ CpuBrand=`sysctl -n machdep.cpu.brand_string | grep "Apple" | wc -l`
 if [ ${CpuBrand} != 0 ];
 then
   ARCH=arm64
+  INSTALL_ARCH=arm64
   export QMAKE_MACOSX_DEPLOYMENT_TARGET=11.0
   export LLVM_INSTALL=/opt/local/clang+llvm-15.0.4-arm64-apple-darwin21.0
 else
   ARCH=x86_64
+  INSTALL_ARCH=64
   export QMAKE_MACOSX_DEPLOYMENT_TARGET=10.15
   export LLVM_INSTALL=/opt/local/clang+llvm-11.0.0-x86_64-apple-darwin
 fi
 
-export PATH=$PATH:$LLVM_INSTALL
+if [ ! -e $LLVM_INSTALL ];
+then
+  echo "LLVM install does not exist: $LLVM_INSTALL"
+  exit;
+fi
+
+export PATH=$PATH:$LLVM_INSTALL/bin
 
 # set -e
 # set -x
@@ -72,7 +80,7 @@ BUILD_TYPE=release
 # Set the INSTALL_ROOT and create the subdirectories
 #------------------------------------------------------------------------------
 INSTALL_ROOT=$NX_SDK_DIR/Qt
-INSTALL_PREFIX=$INSTALL_ROOT/$VERSION/clang_$ARCH
+INSTALL_PREFIX=$INSTALL_ROOT/$VERSION/clang_$INSTALL_ARCH
 DOC_INSTALL_PREFIX=$INSTALL_ROOT/Docs/Qt-$VERSION
 EXAMPLE_INSTALL_PREFIX=$INSTALL_ROOT/Examples/Qt-$VERSION
 
