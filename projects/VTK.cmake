@@ -136,12 +136,13 @@ ExternalProject_Add(${extProjectName}
 #-- configure DREAM3D for building
 FILE(APPEND ${NX_SDK_FILE} "\n")
 FILE(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
-FILE(APPEND ${NX_SDK_FILE} "# VTK Library Location\n")
+FILE(APPEND ${NX_SDK_FILE} "# VTK ${VTK_VERSION} Library Location\n")
+FILE(APPEND ${NX_SDK_FILE} "set(VTK_VERSION \"${VTK_VERSION}\" CACHE STRING \"\")\n")
+
 if(CMAKE_GENERATOR MATCHES "Visual Studio")
-  FILE(APPEND ${NX_SDK_FILE} "set(VTK_DIR \"\${NX_SDK_ROOT}/VTK-${VTK_VERSION}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(VTK_DIR \"\${NX_SDK_ROOT}/VTK-\${VTK_VERSION}\" CACHE PATH \"\")\n")
 else()
-  FILE(APPEND ${NX_SDK_FILE} "set(VTK_DIR \"\${NX_SDK_ROOT}/VTK-${VTK_VERSION}-\${BUILD_TYPE}/lib/cmake/vtk-${VTK_VERSION_SHORT}\" CACHE PATH \"\")\n")
+  FILE(APPEND ${NX_SDK_FILE} "set(VTK_DIR \"\${NX_SDK_ROOT}/VTK-\${VTK_VERSION}-\${BUILD_TYPE}/lib/cmake/vtk-${VTK_VERSION_SHORT}\" CACHE PATH \"\")\n")
 endif()
 FILE(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${VTK_DIR})\n")
-FILE(APPEND ${NX_SDK_FILE} "set(VTK_VERSION \"${VTK_VERSION}\" CACHE STRING \"\")\n")
 

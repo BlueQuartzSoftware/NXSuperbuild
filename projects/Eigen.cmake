@@ -77,5 +77,5 @@ set(Eigen3_DIR "${NX_SDK}/Eigen-${Eigen3_VERSION}/share/eigen3/cmake" CACHE PATH
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 file(APPEND ${NX_SDK_FILE} "# Eigen3 Library Location\n")
-file(APPEND ${NX_SDK_FILE} "set(Eigen3_DIR \"\${NX_SDK_ROOT}/Eigen-${Eigen3_VERSION}/share/eigen3/cmake\" CACHE PATH \"\")\n")
 file(APPEND ${NX_SDK_FILE} "set(Eigen3_VERSION \"${Eigen3_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(Eigen3_DIR \"\${NX_SDK_ROOT}/Eigen-\${Eigen3_VERSION}/share/eigen3/cmake\" CACHE PATH \"\")\n")

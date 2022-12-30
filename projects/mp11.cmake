@@ -62,6 +62,6 @@ ExternalProject_Add(${extProjectName}
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 file(APPEND ${NX_SDK_FILE} "# boost_mp11\n")
-file(APPEND ${NX_SDK_FILE} "set(boost_mp11_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${boost_mp11_VERSION}/lib/cmake/${extProjectName}-${boost_mp11_VERSION}\" CACHE PATH \"\")\n")
-file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${boost_mp11_DIR})\n")
 file(APPEND ${NX_SDK_FILE} "set(boost_mp11_VERSION \"${boost_mp11_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(boost_mp11_DIR \"\${NX_SDK_ROOT}/${extProjectName}-\${boost_mp11_VERSION}/lib/cmake/${extProjectName}-\${boost_mp11_VERSION}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${boost_mp11_DIR})\n")

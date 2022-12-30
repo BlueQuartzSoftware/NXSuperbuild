@@ -63,6 +63,6 @@ ExternalProject_Add(${extProjectName}
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 file(APPEND ${NX_SDK_FILE} "# expected-lite\n")
-file(APPEND ${NX_SDK_FILE} "set(expected-lite_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${expected-lite_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
-file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${expected-lite_DIR})\n")
 file(APPEND ${NX_SDK_FILE} "set(expected-lite_VERSION \"${expected-lite_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(expected-lite_DIR \"\${NX_SDK_ROOT}/${extProjectName}-\${expected-lite_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${expected-lite_DIR})\n")

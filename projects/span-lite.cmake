@@ -63,6 +63,6 @@ ExternalProject_Add(${extProjectName}
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 file(APPEND ${NX_SDK_FILE} "# span-lite\n")
-file(APPEND ${NX_SDK_FILE} "set(span-lite_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${span-lite_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
-file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${span-lite_DIR})\n")
 file(APPEND ${NX_SDK_FILE} "set(span-lite_VERSION \"${span-lite_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(span-lite_DIR \"\${NX_SDK_ROOT}/${extProjectName}-\${span-lite_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${span-lite_DIR})\n")

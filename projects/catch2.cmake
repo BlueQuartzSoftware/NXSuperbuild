@@ -63,6 +63,6 @@ ExternalProject_Add(${extProjectName}
 file(APPEND ${NX_SDK_FILE} "\n")
 file(APPEND ${NX_SDK_FILE} "#--------------------------------------------------------------------------------------------------\n")
 file(APPEND ${NX_SDK_FILE} "# Catch2\n")
-file(APPEND ${NX_SDK_FILE} "set(Catch2_DIR \"\${NX_SDK_ROOT}/${extProjectName}-${Catch2_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
-file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${Catch2_DIR})\n")
 file(APPEND ${NX_SDK_FILE} "set(Catch2_VERSION \"${Catch2_VERSION}\" CACHE STRING \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(Catch2_DIR \"\${NX_SDK_ROOT}/${extProjectName}-\${Catch2_VERSION}/lib/cmake/${extProjectName}\" CACHE PATH \"\")\n")
+file(APPEND ${NX_SDK_FILE} "set(CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH} \${Catch2_DIR})\n")
