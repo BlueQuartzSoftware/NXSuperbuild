@@ -4,21 +4,22 @@ This project will download, configure and build a complete NX SDK and optionally
 
 ## Dependent Libraries ##
 
-+ ninja
-+ CMake 3.19.0
-+ Eigen 3.3.9
-+ HDF5 1.12.1
-+ Qt 5.15.2
-+ ghcFilesystem 1.3.2 (Linux/macOS)
-+ fmt
-+ catch2
-+ nlohmann_json
-+ VTK 9.1
-+ expected-lite
-+ Bool MP11
-+ nod
-+ span-lite
-+ oneTBB 2021.4.0
+| Library Name | GitHub Source | Version |
+|--------------|---------------|---------|
+| boost-mp11  | https://github.com/boostorg/mp11  | 1.77.0 |
+| catch2  | https://github.com/catchorg/Catch2  | 2.13.6 |
+| eigen3  |  https://gitlab.com/libeigen/eigen.git | 3.3.9 |
+| expected-lite  | https://github.com/martinmoene/expected-lite  | 0.5.0 |
+| fmt  | https://github.com/fmtlib/fmt  | 7.1.3 |
+| hdf5  | https://github.com/HDFGroup/hdf5/  | 1.12.1 |
+| itk  | https://github.com/InsightSoftwareConsortium/ITK.git  | 5.2.1 |
+| nlohmann-json  | https://github.com/nlohmann/json/  | 3.9.1 |
+| pybind11  | https://github.com/pybind/pybind11.git  | 2.6.2 |
+| span-lite  | https://github.com/martinmoene/span-lite  | 0.10.3 |
+| oneTBB  | https://github.com/oneapi-src/onetbb  | 2021.5.0 |
+| ebsdlib  | https://www.github.com/bluequartzsoftware/EBSDLib   | 1.0.16 |
+| h5support  | https://www.github.com/bluequartzsoftware/H5Support  | 1.0.8 |
+| nod  |https://github.com/fr00b0/nod.git  | 0.5.2 |
 
 ## Future Dependencies ##
 
