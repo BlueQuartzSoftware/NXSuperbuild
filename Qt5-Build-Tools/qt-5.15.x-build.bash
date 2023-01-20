@@ -49,7 +49,7 @@ export NX_SDK_DIR=/Users/Shared/NX_SDK
 #------------------------------------------------------------------------------
 # Set the version of Qt5 that we are going to build
 #------------------------------------------------------------------------------
-VERSION=5.15.7
+VERSION=5.15.8
 
 #------------------------------------------------------------------------------
 # Where are we building Qt5
@@ -91,24 +91,24 @@ mkdir -p $EXAMPLE_INSTALL_PREFIX
 #------------------------------------------------------------------------------
 # Patch sources for macOS 11 (Big Sur) and macOS 12 (Monterey) compile and ARM64
 #------------------------------------------------------------------------------
-pushd $Qt5_SOURCE_DIR/qtbase > /dev/null
-git reset --hard
-case $ARCH in
-  arm64)
-    patch -p1 < "$SCRIPT_DIR/qtbase_qiosurfacegraphicsbuffer.patch" || exit $?
-    patch -p1 < "$SCRIPT_DIR/qtbase-apple-silicon.patch" || exit $?
-    ;;
-esac
-popd > /dev/null
+# pushd $Qt5_SOURCE_DIR/qtbase > /dev/null
+# git reset --hard
+# case $ARCH in
+#   arm64)
+#     patch -p1 < "$SCRIPT_DIR/qtbase_qiosurfacegraphicsbuffer.patch" || exit $?
+#     patch -p1 < "$SCRIPT_DIR/qtbase-apple-silicon.patch" || exit $?
+#     ;;
+# esac
+# popd > /dev/null
 
-pushd $Qt5_SOURCE_DIR/qt3d > /dev/null
-git reset --hard
-case $ARCH in
-  arm64)
-    patch -p1 < "$SCRIPT_DIR/qt3d_miniz.patch" || exit $?
-    ;;
-esac
-popd > /dev/null
+# pushd $Qt5_SOURCE_DIR/qt3d > /dev/null
+# git reset --hard
+# case $ARCH in
+#   arm64)
+#     patch -p1 < "$SCRIPT_DIR/qt3d_miniz.patch" || exit $?
+#     ;;
+# esac
+# popd > /dev/null
 
 #------------------------------------------------------------------------------
 # REMOVE ANY EXISTING BUILD !!!!!!
