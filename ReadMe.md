@@ -19,7 +19,9 @@ This project will download, configure and build a complete NX SDK and optionally
 | oneTBB  | https://github.com/oneapi-src/onetbb  | 2021.5.0 |
 | ebsdlib  | https://www.github.com/bluequartzsoftware/EBSDLib   | 1.0.16 |
 | h5support  | https://www.github.com/bluequartzsoftware/H5Support  | 1.0.8 |
-| nod  |https://github.com/fr00b0/nod.git  | 0.5.2 |
+| nod  | https://github.com/fr00b0/nod.git  | 0.5.2 |
+| Qt5  | https://github.com/qt/qt5.git  | 5.15.2 |
+| VTK  | https://github.com/Kitware/VTK.git  | 9.1.0 |
 
 ## Future Dependencies ##
 
