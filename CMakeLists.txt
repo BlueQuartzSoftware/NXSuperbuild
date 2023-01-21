@@ -140,6 +140,7 @@ include(fmt)
 include(expected-lite)
 include(span-lite)
 include(mp11)
+include(reproc)
 
 #--------------------------------------------------------------------------------------------------
 # Install or figure out where Qt5 is installed
