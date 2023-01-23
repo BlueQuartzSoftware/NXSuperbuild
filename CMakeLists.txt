@@ -93,6 +93,13 @@ if(APPLE)
     message(STATUS "Found macOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} as the host. Darwin Version:${DARWIN_VERSION}")
   ENDIF ()
 
+  IF (DARWIN_VERSION EQUAL 22) # macOS 13.00 Ventura (Xcode 13.x/Xcode 14.x)
+    set(MACOS_NAME "Monterey")
+    set(OSX_DEPLOYMENT_TARGET "12.00")
+    set(OSX_SDK "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk")
+    message(STATUS "Found macOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} as the host. Darwin Version:${DARWIN_VERSION}")
+  ENDIF ()
+
   if("${OSX_SDK}" STREQUAL "NOT-FOUND")
     message(FATAL_ERROR "This version of macOS (${DARWIN_VERSION}) is not recognized.\
       The following versions are supported:\n\
