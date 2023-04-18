@@ -7,9 +7,9 @@ if("${BUILD_VTK}" STREQUAL "OFF")
 endif()
 
 set(extProjectName "VTK")
-set(VTK_GIT_TAG "v9.1.0")
-set(VTK_VERSION "9.1.0")
-set(VTK_VERSION_SHORT "9.1")
+set(VTK_GIT_TAG "v9.2.6")
+set(VTK_VERSION "9.2.6")
+set(VTK_VERSION_SHORT "9.2")
 
 message(STATUS "Building: ${extProjectName} ${VTK_VERSION}: -DBUILD_VTK=${BUILD_VTK}" )
 
