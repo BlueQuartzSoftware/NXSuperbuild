@@ -11,6 +11,8 @@ set(VTK_GIT_TAG "v9.2.6")
 set(VTK_VERSION "9.2.6")
 set(VTK_VERSION_SHORT "9.2")
 
+set(VTK_QT_VERSION 6)
+
 message(STATUS "Building: ${extProjectName} ${VTK_VERSION}: -DBUILD_VTK=${BUILD_VTK}" )
 
 set(SOURCE_DIR "${NX_SDK}/superbuild/${extProjectName}-${VTK_VERSION}/Source/${extProjectName}")
@@ -70,9 +72,9 @@ execute_process(
   OUTPUT_VARIABLE QT_INSTALL_LIBS
   OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_STRIP_TRAILING_WHITESPACE
 )
-message(STATUS "  Qt Version: ${qt5_version_full}:")
-message(STATUS "  Qt5_QMAKE_EXECUTABLE: ${Qt5_QMAKE_EXECUTABLE}")
-message(STATUS "  Qt5_DIR:              ${QT_INSTALL_LIBS}/cmake/Qt5")
+message(STATUS "  Qt Version: ${qt${VTK_QT_VERSION}_version_full}:")
+message(STATUS "  Qt${VTK_QT_VERSION}_QMAKE_EXECUTABLE: ${Qt${VTK_QT_VERSION}_QMAKE_EXECUTABLE}")
+message(STATUS "  Qt${VTK_QT_VERSION}_DIR:              ${QT_INSTALL_LIBS}/cmake/Qt${VTK_QT_VERSION}")
 
 #------------------------------------------------------------------------------
 # 
@@ -105,7 +107,8 @@ ExternalProject_Add(${extProjectName}
     -DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}
     
     -DQt5_DIR=${QT_INSTALL_LIBS}/cmake/Qt5
-    -DVTK_QT_VERSION=5
+    -DQt6_DIR=${QT_INSTALL_LIBS}/cmake/Qt6
+    -DVTK_QT_VERSION=${VTK_QT_VERSION}
     -DVTK_GROUP_ENABLE_Qt=YES
     -DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES
     -DVTK_MODULE_ENABLE_VTK_GUISupportQtSQL=NO
