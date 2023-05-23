@@ -59,58 +59,38 @@ set(NX_CUSTOM_DOWNLOAD_URL_PREFIX "http://dream3d.bluequartz.net/binaries/SDK/" 
 set(BUILD_SHARED_LIBS ON)
 
 if(APPLE)
-  set(OSX_DEPLOYMENT_TARGET "10.15")
-  set(OSX_SDK "NOT-FOUND")
-  EXEC_PROGRAM(uname ARGS -v  OUTPUT_VARIABLE DARWIN_VERSION)
-  STRING(REGEX MATCH "[0-9]+" DARWIN_VERSION ${DARWIN_VERSION})
-  IF (DARWIN_VERSION LESS 19) 
-    set(MACOS_NAME "Yosemite")
-    set(OSX_DEPLOYMENT_TARGET "10.10")
-    set(OSX_SDK "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk")
-    message(STATUS "Found macOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} as the host. Darwin Version:${DARWIN_VERSION}")
-    message(FATAL_ERROR "MacOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} NOT supported. macOS Catalina is the minimum system")
-  ENDIF ()
+  set(OSX_DEPLOYMENT_TARGET "11.0")
+  execute_process(COMMAND uname -v
+                  OUTPUT_VARIABLE DARWIN_VERSION)
+                  string(REGEX MATCH "[0-9]+" DARWIN_VERSION ${DARWIN_VERSION})
 
-  IF (DARWIN_VERSION EQUAL 19) # macOS 10.15 Catalina (Xcode 11.x or Xcode 12.x)
-    set(MACOS_NAME "Catalina")
-    set(OSX_DEPLOYMENT_TARGET "10.15")
-    set(OSX_SDK "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk")
-    message(STATUS "Found macOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} as the host. Darwin Version:${DARWIN_VERSION}")
-  ENDIF ()
+  execute_process(COMMAND sw_vers -productVersion
+                  OUTPUT_VARIABLE OSX_PRODUCT_VERSION)
+                  string(STRIP "${OSX_PRODUCT_VERSION}" OSX_PRODUCT_VERSION)
 
-  IF (DARWIN_VERSION EQUAL 20) # macOS 11.00 Big Sur (Xcode 12.x)
-    set(MACOS_NAME "Big Sur")
-    set(OSX_DEPLOYMENT_TARGET "11.00")
-    set(OSX_SDK "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk")
-    set(OSX_DEPLOYMENT_TARGET "11.00")
-    message(STATUS "Found macOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} as the host. Darwin Version:${DARWIN_VERSION}")
-  ENDIF ()
+  if(DARWIN_VERSION EQUAL 19) # macOS 10.15 Catalina (Xcode 11.x or Xcode 12.x)
+    message(FATAL_ERROR "MacOS Big Sur (11.x) is the minimum version needed to compile DREAM.3D NX")
+  endif()
+
+  if(DARWIN_VERSION EQUAL 20) # macOS 11.00 Big Sur (Xcode 12.x)
+    # message(STATUS "Found macOS 11.00 Big Sur as the host. Darwin Version:${DARWIN_VERSION}")
+    set(CMAKE_MACOS_NAME "Big Sur")
+    set(CMAKE_MACOS_VERSION "11.00")
+  endif()
 
   IF (DARWIN_VERSION EQUAL 21) # macOS 12.00 Monterey (Xcode 12.x/Xcode 13.x)
-    set(MACOS_NAME "Monterey")
-    set(OSX_DEPLOYMENT_TARGET "12.00")
-    set(OSX_SDK "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk")
-    message(STATUS "Found macOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} as the host. Darwin Version:${DARWIN_VERSION}")
+    set(CMAKE_MACOS_NAME "Monterey")
+    set(CMAKE_MACOS_VERSION "12.00")
   ENDIF ()
 
   IF (DARWIN_VERSION EQUAL 22) # macOS 13.00 Ventura (Xcode 13.x/Xcode 14.x)
-    set(MACOS_NAME "Monterey")
-    set(OSX_DEPLOYMENT_TARGET "12.00")
-    set(OSX_SDK "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk")
-    message(STATUS "Found macOS ${OSX_DEPLOYMENT_TARGET} ${MACOS_NAME} as the host. Darwin Version:${DARWIN_VERSION}")
+    set(CMAKE_MACOS_NAME "Ventura")
+    set(CMAKE_MACOS_VERSION "13.00")
   ENDIF ()
 
-  if("${OSX_SDK}" STREQUAL "NOT-FOUND")
-    message(FATAL_ERROR "This version of macOS (${DARWIN_VERSION}) is not recognized.\
-      The following versions are supported:\n\
-      (19) macOS 10.15 Catalina\n\
-      (20) macOS 11.00 Big Sur\n\
-      (21) macOS 12.00 Monterey\n\
-      Please edit ${CMAKE_CURRENT_LIST_FILE} and add this version of macOS to the detection logic.
-    ")
+  message(STATUS "* System: MacOS ${CMAKE_MACOS_NAME} (${OSX_PRODUCT_VERSION}) Running on ${CMAKE_SYSTEM_PROCESSOR}")
+  message(STATUS "* OSX_DEPLOYMENT_TARGET: ${OSX_DEPLOYMENT_TARGET}")
 
-  endif()
-  message(STATUS "CMAKE_HOST_SYSTEM_PROCESSOR: ${CMAKE_HOST_SYSTEM_PROCESSOR}")
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/projects/apple/OSX_NX_SDK.cmake
               ${NX_SDK}/NX.cmake @ONLY )
 elseif(WIN32)
